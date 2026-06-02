@@ -2,7 +2,7 @@
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-Le Sprint~5 couvre les semaines S9--S10 (35 stories, 112~SP). Il complète la plateforme avec des fonctionnalités avancées d'Intelligence Artificielle : six modèles de Machine Learning prédictifs déployés via FastAPI, ainsi qu'un assistant conversationnel (Chatbot) Text-to-SQL permettant d'interroger la base de données en langage naturel.
+Le Sprint~5 complète Fleet~AI avec la couche d'Intelligence Artificielle. Six modèles de Machine Learning sont entraînés, évalués et déployés via une API FastAPI dédiée : scoring des chauffeurs, prévision de la demande par zone, détection des retards, dimensionnement de flotte, optimisation des tournées et évaluation du risque paiement. Chaque modèle suit la méthodologie CRISP-DM et est intégré directement dans l'interface métier concernée. En complément, un assistant conversationnel Text-to-SQL basé sur un LLM local (Gemma 4 31B via Ollama) permet aux managers d'interroger la base de données analytique en langage naturel, sans écrire de requêtes SQL. Ce sprint transforme Fleet~AI d'un outil de gestion en une plateforme décisionnelle intelligente.
 
 \clearpage
 
@@ -10,7 +10,7 @@ Le Sprint~5 couvre les semaines S9--S10 (35 stories, 112~SP). Il complète la pl
 \section{Sprint Backlog}
 % =============================================================
 
-\textbf{Objectif du sprint :} Déployer la couche d'intelligence artificielle de Fleet~AI. Le système prédit la demande par zone et les retards, optimise les tournées et évalue les risques. Un Chatbot conversationnel sécurisé permet d'interagir avec les données analytiques en langage naturel.
+\textbf{Objectif du sprint :} L'objectif est de déployer la couche IA de Fleet~AI : six modèles prédictifs couvrant le scoring chauffeur, la demande, les retards, la flotte, les tournées et le risque paiement, ainsi qu'un assistant conversationnel Text-to-SQL accessible en langage naturel.
 
 \input{sprint_backlog_5}
 
@@ -499,6 +499,7 @@ Le score de risque paiement (Low~/ Medium~/ High~/ Critical) est affiché par le
 \begin{table}[H]
 \centering
 \setlength{\arrayrulewidth}{1pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \rowcolor{headerbg}
@@ -516,7 +517,8 @@ M5 Route Learning & Clustering + VRP & K-Means + OR-Tools & km réduit & \texttt
 \hline
 M6 Payment Risk & Régression & XGBoost & Score 0--100 & \texttt{/ml/payment-risk} \\
 \hline
-\end{tabular}
+\end{tabular}%
+}
 \caption{Comparatif des six modèles ML déployés dans Fleet~AI}
 \label{tab:ml-comparatif}
 \end{table}

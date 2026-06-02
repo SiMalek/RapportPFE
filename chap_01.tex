@@ -81,7 +81,7 @@ Fleet~AI doit :
     \item Affecter les commandes aux chauffeurs de façon assistée, avec vérification de capacité et de disponibilité.
     \item Calculer et optimiser les itinéraires de livraison, puis suivre leur exécution en temps réel.
     \item Prédire les retards et la demande par zone à 7 jours.
-    \item Gérer les paiements (espèces, chèque, crédit) avec validation EC obligatoire avant remise.
+    \item Gérer les paiements (espèces, chèque, crédit) avec validation REC obligatoire avant remise.
     \item Collecter des preuves de livraison numériques (signature, photo, scan).
     \item Offrir un mode hors-ligne aux chauffeurs et clients via l'application mobile.
     \item Mettre à disposition des tableaux de bord avec KPIs en temps réel et rapports exportables.
@@ -130,7 +130,7 @@ MG & Manager & Supervise les opérations, consulte les dashboards stratégiques 
 \hline
 CH & Chauffeur & Exécute les livraisons sur le terrain via l'app mobile : consulte ses missions et l'itinéraire, confirme les livraisons (signature, photo, scan), encaisse les paiements, signale les problèmes, déclare ses disponibilités. \\
 \hline
-EC & Engagement Client & Gère le référentiel clients, crée et modifie les commandes, gère le stock publié, traite les réclamations, rapproche les encaissements. \\
+REC & Responsable Engagement Client & Gère le référentiel clients, crée et modifie les commandes, gère le stock publié, traite les réclamations, rapproche les encaissements. \\
 \hline
 CL & Client & Consulte ses commandes et le stock publié, suit ses livraisons en temps réel, note le service après livraison, soumet des réclamations, configure ses préférences de notification. \\
 \hline
@@ -143,7 +143,7 @@ CL & Client & Consulte ses commandes et le stock publié, suit ses livraisons en
 \subsubsection{Gestion des ressources}
 \begin{itemize}[leftmargin=2.5em]
     \item[$\bullet$] Authentification unifiée via la passerelle WFMS.
-    \item[$\bullet$] Gestion des comptes utilisateurs selon les profils définis (AD, PL, MG, CH, EC, CL).
+    \item[$\bullet$] Gestion des comptes utilisateurs selon les profils définis (AD, PL, MG, CH, REC, CL).
     \item[$\bullet$] Contrôle d'accès basé sur les rôles (RBAC) garantissant la sécurité des accès.
     \item[$\bullet$] Gestion des véhicules (statuts, capacité, kilométrage, coûts par catégorie, taux d'utilisation).
     \item[$\bullet$] Gestion des chauffeurs (permis, zones, disponibilités, score de performance configurable).
@@ -156,7 +156,7 @@ CL & Client & Consulte ses commandes et le stock publié, suit ses livraisons en
 \begin{itemize}[leftmargin=2.5em]
     \item[$\bullet$] Gestion des profils clients : création, modification et blocage en cas de problème.
     \item[$\bullet$] Gestion des commandes : cycle de vie complet (créée $\to$ affectée $\to$ en transit $\to$ livrée / annulée / échouée).
-    \item[$\bullet$] Gestion du stock : stock réel (synchronisé WFMS) et stock publié (défini par l'EC, visible par le client).
+    \item[$\bullet$] Gestion du stock : stock réel (synchronisé WFMS) et stock publié (défini par le REC, visible par le client).
     \item[$\bullet$] Priorités commandes (standard, express, premium) et niveaux clients (standard, premium, VIP).
     \item[$\bullet$] Notation mobile du service par le client.
 \end{itemize}
@@ -309,7 +309,7 @@ Fleet~AI est une \textbf{application additionnelle} qui s'exécute dans un écos
 \textbf{Intégration avec WFMS :}
 \begin{itemize}[leftmargin=2.5em]
     \item[$\bullet$] Toutes les requêtes vers Fleet~AI transitent par la \textbf{passerelle Flask} de WFMS, qui gère l'authentification, le déchiffrement des tokens RSA et le routage.
-    \item[$\bullet$] Le RBAC de Fleet~AI est aligné sur le système de rôles WFMS : AD, PL, MG, CH, EC, CL.
+    \item[$\bullet$] Le RBAC de Fleet~AI est aligné sur le système de rôles WFMS : AD, PL, MG, CH, REC, CL.
     \item[$\bullet$] L'interface Angular de Fleet~AI est intégrée dans la navigation latérale WFMS, avec le même thème PrimeNG et les mêmes mécanismes de session.
 \end{itemize}
 
