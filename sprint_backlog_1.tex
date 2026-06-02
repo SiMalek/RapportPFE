@@ -1,0 +1,169 @@
+\definecolor{headerbg}{HTML}{d5f5e3}
+\setlength{\arrayrulewidth}{1pt}
+
+Les story points (SP) sont estimés par l'équipe de développement selon la suite de Fibonacci (1, 2, 3, 5, 8, 13, \ldots). Chaque valeur reflète la \textbf{complexité fonctionnelle}, l'\textbf{effort} et le \textbf{risque} associé à la User Story, et non une durée en heures. L'échelle retenue est : 1--2 (tâche simple, déjà maîtrisée), 3--5 (complexité modérée), 8--13 (tâche complexe ou comportant une forte incertitude).
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.5cm}|c|}
+\hline
+\rowcolor{headerbg}
+\textbf{User Story} & \textbf{Tâche} & \textbf{Critères d'acceptation} & \textbf{\rotatebox{90}{SP}} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{headerbg}
+\textbf{User Story} & \textbf{Tâche} & \textbf{Critères d'acceptation} & \textbf{\rotatebox{90}{SP}} \\
+\hline
+\endhead
+\hline
+\endfoot
+
+%------ US-001 ------
+\multirow{2}{=}{En tant qu'utilisateur, je veux me connecter avec mes identifiants habituels afin d'accéder aux fonctionnalités Fleet~AI correspondant à mon rôle.}
+& Mettre en place la vérification des identifiants à la connexion afin de valider l'accès de l'utilisateur. & L'utilisateur peut se connecter avec ses identifiants habituels ; un message clair s'affiche en cas d'erreur. & 3 \\
+\cline{2-4}
+& Rediriger chaque utilisateur vers son espace dédié selon son rôle après connexion réussie. & Chaque rôle accède à son interface dédiée après authentification. & 2 \\
+\hline
+
+%------ US-002 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux que les droits de chaque utilisateur soient contrôlés à chaque accès afin que chacun n'utilise que les fonctionnalités autorisées par son rôle.}
+& Contrôler les droits d'accès de l'utilisateur à chaque action sensible selon son rôle. & Un utilisateur sans les droits requis se voit refuser l'accès avec un message explicite ; son rôle détermine ses permissions. & 3 \\
+\cline{2-4}
+& Valider que chaque rôle accède uniquement aux fonctionnalités qui lui sont autorisées. & Les accès autorisés et refusés sont cohérents avec les droits définis par rôle pour tous les profils du système. & 2 \\
+\hline
+
+%------ US-003 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux gérer les comptes utilisateurs afin de contrôler les accès au système.}
+& Permettre à l'Administrateur de créer, modifier et désactiver des comptes utilisateurs selon leur rôle. & Le CRUD complet fonctionne ; un compte désactivé ne peut plus accéder au système. & 3 \\
+\cline{2-4}
+& Mettre à disposition de l'Administrateur une interface de gestion des comptes avec liste paginée et formulaires. & La liste des utilisateurs est consultable avec filtres ; les formulaires de création et d'édition sont fonctionnels. & 2 \\
+\hline
+
+%------ US-004 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux assigner un rôle à chaque utilisateur afin de définir ses permissions.}
+& Associer un rôle unique à chaque utilisateur lors de sa création afin de définir ses droits dans le système. & Le rôle attribué détermine les fonctionnalités accessibles ; les permissions sont vérifiées à chaque action. & 3 \\
+\cline{2-4}
+& Présenter la liste des rôles disponibles dans le formulaire de création d'utilisateur avec sélection obligatoire. & La liste des rôles est affichée ; la sélection est obligatoire avant validation du formulaire. & 2 \\
+\hline
+
+%------ US-005 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux gérer les zones géographiques de livraison afin de structurer les opérations par région.}
+& Permettre la création et la modification de zones géographiques définies par des polygones sur carte. & Les zones sont définies par polygone sur carte ; leur surface et périmètre sont calculés automatiquement. & 3 \\
+\cline{2-4}
+& Mettre à disposition une carte interactive permettant à l'Administrateur de dessiner et modifier les zones. & La carte interactive permet la création et l'édition des polygones de zones géographiques. & 2 \\
+\hline
+
+%------ US-006 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux consulter le journal d'audit du système afin de tracer toutes les actions critiques.}
+& Enregistrer automatiquement toutes les actions critiques (entité concernée, acteur, date, type d'action). & Les entrées du journal sont enregistrées pour chaque action ; filtrables par date, utilisateur, action et entité. & 3 \\
+\cline{2-4}
+& Mettre à disposition de l'Administrateur une interface de consultation du journal avec pagination et filtres. & La liste des entrées est paginée ; les filtres combinés fonctionnent correctement. & 2 \\
+\hline
+
+%------ US-007 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux déclencher des sauvegardes des données afin de protéger les informations du système.}
+& Permettre à l'Administrateur de déclencher une sauvegarde complète de la base de données. & La sauvegarde est effectuée et archivée avec horodatage ; l'Administrateur peut confirmer son succès. & 2 \\
+\cline{2-4}
+& Afficher à l'Administrateur l'historique des sauvegardes avec leur statut. & L'historique des sauvegardes est consultable avec statut mis à jour (en cours, terminée, échouée). & 1 \\
+\hline
+
+%------ US-008 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux consulter le tableau de bord avec les statistiques générales afin de superviser l'état du système.}
+& Calculer et exposer les indicateurs clés du système (utilisateurs actifs, véhicules, chauffeurs, zones, coûts). & Les indicateurs affichés sont corrects et filtrables par période. & 3 \\
+\cline{2-4}
+& Présenter les indicateurs et tendances sous forme de graphiques et de tableau de bord visuel. & Le tableau de bord affiche les KPIs, les tendances de coûts et l'activité récente. & 2 \\
+\hline
+
+%------ US-009 ------
+\multirow{2}{=}{En tant que Planificateur, je veux consulter la liste des véhicules avec leur statut afin de connaître les ressources disponibles.}
+& Mettre à disposition du Planificateur la liste des véhicules filtrée par statut et par zone. & La liste affiche le statut, la capacité (poids/volume), le kilométrage et la zone ; pagination intégrée. & 2 \\
+\cline{2-4}
+& Permettre au Planificateur de filtrer et trier la liste des véhicules selon ses besoins. & La liste des véhicules s'affiche avec filtres fonctionnels par statut et par zone. & 1 \\
+\hline
+
+%------ US-010 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux gérer les véhicules afin de maintenir le référentiel à jour.}
+& Permettre à l'Administrateur de créer, modifier et supprimer des véhicules, avec protection contre la suppression d'un véhicule en mission. & Un véhicule en mission ne peut être supprimé ; la suppression est logique et réversible. & 2 \\
+\cline{2-4}
+& Mettre à disposition de l'Administrateur un formulaire de création et modification des véhicules avec validation des champs. & Le formulaire valide tous les champs obligatoires ; la liste se met à jour après sauvegarde. & 1 \\
+\hline
+
+%------ US-011 ------
+\multirow{2}{=}{En tant que Planificateur, je veux marquer un véhicule en maintenance afin de le retirer temporairement de la planification.}
+& Permettre au Planificateur de changer le statut d'un véhicule vers « En maintenance », avec enregistrement dans le journal d'audit. & Le changement est immédiat ; le véhicule en maintenance est exclu des affectations. & 2 \\
+\cline{2-4}
+& Afficher une demande de confirmation au Planificateur avant le changement de statut du véhicule. & La confirmation est demandée avant l'action ; le statut est mis à jour dans la liste. & 1 \\
+\hline
+
+%------ US-012 ------
+\multirow{2}{=}{En tant que Manager, je veux consulter le taux d'utilisation des véhicules afin d'optimiser la flotte.}
+& Calculer le taux d'utilisation des véhicules à partir de leur historique de kilométrage. & Le taux est calculé par véhicule et de manière globale sur la période sélectionnée. & 3 \\
+\cline{2-4}
+& Présenter le taux d'utilisation sous forme de graphique par véhicule avec sélection de période. & Le graphique s'affiche par véhicule avec sélection de la période. & 2 \\
+\hline
+
+%------ US-013 ------
+\multirow{2}{=}{En tant que Manager, je veux consulter les coûts par véhicule afin de suivre les dépenses opérationnelles.}
+& Calculer et exposer les coûts par véhicule ventilés par catégorie (carburant, entretien, assurance). & Les coûts sont ventilés par catégorie ; les tendances mensuelles sont calculées. & 3 \\
+\cline{2-4}
+& Présenter les coûts sous forme de graphique et identifier les 5 véhicules les plus coûteux. & Le tableau de bord affiche les 5 véhicules les plus coûteux avec graphique mensuel. & 2 \\
+\hline
+
+%------ US-014 ------
+\multirow{2}{=}{En tant que Planificateur, je veux consulter la disponibilité des chauffeurs afin de planifier les affectations.}
+& Mettre à disposition du Planificateur un calendrier de disponibilité des chauffeurs avec filtres par type et par zone. & Le calendrier affiche les disponibilités par type (disponible, congé, mission) et par zone. & 3 \\
+\cline{2-4}
+& Permettre au Planificateur de filtrer les disponibilités par plage de dates et par zone. & La vue calendrier filtrée par date et par zone fonctionne correctement. & 2 \\
+\hline
+
+%------ US-015 ------
+\multirow{2}{=}{En tant que Planificateur, je veux consulter les performances des chauffeurs afin de guider les affectations.}
+& Calculer les indicateurs de performance des chauffeurs (taux de livraison, ponctualité, notation moyenne) selon les coefficients configurés. & Les indicateurs sont calculés selon les coefficients définis par l'Administrateur et affichés dans la fiche du chauffeur. & 3 \\
+\cline{2-4}
+& Présenter les indicateurs de performance du chauffeur avec des repères visuels dans son profil. & La fiche chauffeur affiche les indicateurs avec des repères visuels de niveau. & 2 \\
+\hline
+
+%------ US-016 ------
+\multirow{2}{=}{En tant que Manager, je veux consulter le classement des chauffeurs afin d'identifier les plus et les moins performants.}
+& Calculer et présenter le classement des chauffeurs selon leur score global pondéré. & Le classement est trié par score global ; accessible depuis le tableau de bord. & 2 \\
+\cline{2-4}
+& Afficher le classement des chauffeurs avec des indicateurs permettant d'identifier les plus et moins performants. & Le classement s'affiche avec indicateurs colorés de performance. & 1 \\
+\hline
+
+%------ US-017 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux configurer les indicateurs de performance des chauffeurs afin d'adapter le calcul du score global.}
+& Permettre à l'Administrateur de modifier les 3 coefficients de performance des chauffeurs ; toute modification est enregistrée dans le journal d'audit. & Les modifications sont tracées dans le journal d'audit. & 2 \\
+\cline{2-4}
+& Présenter un formulaire de configuration des coefficients avec validation de leur cohérence. & Le formulaire vérifie que les coefficients sont cohérents et la somme correcte avant enregistrement. & 1 \\
+\hline
+
+%------ US-018 ------
+\multirow{2}{=}{En tant que Chauffeur, je veux me connecter à l'application mobile afin d'accéder à mes fonctionnalités Fleet~AI.}
+& Permettre au Chauffeur de se connecter à l'application mobile avec ses identifiants habituels et de rester authentifié. & La connexion mobile fonctionne ; l'application Fleet~AI est accessible depuis l'application après authentification. & 3 \\
+\cline{2-4}
+& Permettre au Chauffeur d'accéder à l'application Fleet~AI depuis le menu de navigation de l'application mobile. & L'application Fleet~AI est accessible depuis le menu de navigation après connexion. & 2 \\
+\hline
+
+%------ US-019 ------
+\multirow{2}{=}{En tant que Chauffeur, je veux consulter mes indicateurs de performance depuis l'application mobile afin de suivre mon activité.}
+& Présenter au Chauffeur ses indicateurs de performance personnels sur l'application mobile. & L'écran affiche les indicateurs avec graphiques ; les coefficients de pondération sont ceux configurés par l'Administrateur. & 3 \\
+\cline{2-4}
+& Afficher les graphiques de performance sur l'application mobile de manière lisible. & Les graphiques de performance s'affichent correctement sur l'application mobile. & 2 \\
+\hline
+
+%------ US-020 ------
+\multirow{2}{=}{En tant que Chauffeur, je veux déclarer ma disponibilité depuis l'application mobile afin de signaler mes périodes de présence et d'absence.}
+& Permettre au Chauffeur de déclarer ses périodes de disponibilité ou d'absence depuis l'application mobile (types : disponible, congé, formation, mission). & La déclaration est enregistrée ; les chevauchements de créneaux sont détectés et signalés. & 3 \\
+\cline{2-4}
+& Valider les règles de disponibilité selon le type de contrat du chauffeur (officiel ou prestataire). & Les chauffeurs officiels ne peuvent déclarer que des absences ; les prestataires peuvent déclarer leur disponibilité. & 2 \\
+\hline
+
+%------ US-113/114 ------
+\multirow{2}{=}{En tant qu'utilisateur, je veux configurer mes préférences de notifications et consulter mon historique depuis mon application.}
+& Permettre à l'utilisateur de choisir ses canaux de notification (dans l'application, par email) par type d'événement. & L'utilisateur peut choisir les canaux par type d'événement et sauvegarder ses préférences. & 2 \\
+\cline{2-4}
+& Permettre à l'utilisateur de consulter l'historique de ses notifications depuis l'application web ou mobile. & Les préférences sont sauvegardées ; l'historique des notifications est accessible. & 1 \\
+\hline
+
+\caption{Sprint Backlog du Sprint 1 --- Fondation \& Gestion des Ressources (20 stories, 76 SP)}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}

@@ -1,0 +1,19 @@
+\newpage
+\vspace*{0.6\baselineskip}
+\begin{center}
+  {\Huge\bfseries Conclusion générale}
+\end{center}
+\addcontentsline{toc}{chapter}{Conclusion générale}
+\markboth{Conclusion générale}{}
+\vspace{1.5cm}
+
+Ce projet de fin d'études, réalisé chez \textbf{GREPSYS Tunisia} pour \textbf{Poulina Group Holding}, nous a conduits à concevoir et développer \textbf{Fleet~AI} de zéro : 133 user stories réparties sur cinq sprints de deux semaines, intégrées à la plateforme WFMS sans en modifier le code source.\\
+
+Le point de départ était simple : PGH planifiait ses livraisons à la main, communiquait par téléphone et ne disposait d'aucune traçabilité des paiements. Le système livré couvre l'ensemble du cycle logistique.
+
+Le \textbf{Sprint~1} a posé les fondations : authentification WFMS, gestion des utilisateurs avec RBAC, référentiels véhicules, chauffeurs et zones, journal d'audit et l'application mobile chauffeur. Le \textbf{Sprint~2} a introduit la gestion des clients, le workflow de commande à dix statuts et l'application mobile client. Le \textbf{Sprint~3} a ajouté la planification assistée par OR-Tools, le suivi GPS temps réel via WebSocket et la gestion enterprise des disponibilités. Le \textbf{Sprint~4} a couvert l'exécution terrain et le suivi client : preuves numériques de livraison, trois modes de paiement avec validation REC, gestion des réclamations avec escalade, notifications multicanal et mode hors ligne mobile. Le \textbf{Sprint~5} a doté la plateforme de son intelligence artificielle : modèles de prédiction ML déployés via FastAPI (scoring, demande, retards, dimensionnement, routes, risque de paiement) et un assistant conversationnel (chatbot) Text-to-SQL sécurisé.\\
+
+Sur le plan technique, nous avons travaillé avec une pile variée (Angular 19, Spring Boot 3.4, Flutter, FastAPI, PostgreSQL, MongoDB, Redis) dans un écosystème déjà en production, ce qui impose des contraintes que les projets académiques standards n'ont pas. L'intégration avec l'ERP de PGH via un adaptateur ETL, sans toucher aux systèmes existants, a été la contrainte la plus complexe à gérer.\\
+
+Ce stage nous a appris autant sur la gestion des contraintes d'intégration que sur les technologies elles-mêmes.
+

@@ -1,0 +1,218 @@
+\chapter{Sprint 1 : Fondation \& Gestion des Ressources}
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+Le Sprint~1 met en place l'infrastructure fondatrice de Fleet~AI : authentification WFMS, référentiels utilisateurs, véhicules, chauffeurs et zones, tableau de bord, journal d'audit, sauvegardes et l'application mobile chauffeur.
+
+\clearpage
+
+\section{Sprint Backlog}
+
+\textbf{Objectif du sprint :} L'authentification unifiée WFMS est opérationnelle sur web et mobile. L'Administrateur gère les utilisateurs avec contrôle d'accès par rôles, les véhicules, les zones géographiques, les logs d'audit et les sauvegardes. Le Planificateur consulte les ressources disponibles. Le Manager suit les coûts et l'utilisation. Le Chauffeur accède à son profil, ses métriques et déclare sa disponibilité depuis l'application mobile.
+
+\input{sprint_backlog_1}
+
+\section{Conception}
+
+\subsection{Diagramme de cas d'utilisation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_1_usecase}
+\caption{Diagramme de cas d'utilisation du Sprint 1}
+\label{fig:cas-utilisation-sp1}
+\end{figure}
+
+\subsection{Description textuelle}
+
+\captionsetup[longtable]{justification=centering}
+\setlength{\arrayrulewidth}{1pt}
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+\rowcolor{headerbg}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+\textbf{Titre} & Gérer les chauffeurs \\
+\hline
+\textbf{Acteurs} & Administrateur, Planificateur \\
+\hline
+\textbf{Objectif} & Permettre la gestion complète des profils chauffeurs : création, consultation, modification et suppression depuis l'application web. \\
+\hline
+\textbf{Précondition} & L'utilisateur est authentifié via WFMS et possède le rôle Administrateur ou Planificateur. \\
+\hline
+\textbf{Postcondition} & L'opération est enregistrée dans le journal d'audit MongoDB. \\
+\hline
+\textbf{Scénario nominal} &
+\begin{enumerate}[start=1, label=\arabic*.]
+    \item L'utilisateur accède à la page « Chauffeurs » depuis le menu latéral.
+    \item Le système affiche la liste paginée des chauffeurs (nom, prénom, zone, permis, score).
+    \item Pour ajouter : l'utilisateur clique sur « Ajouter », remplit le formulaire et valide.
+    \item Pour modifier : l'utilisateur clique sur l'icône d'édition, modifie les champs et valide.
+    \item Pour supprimer : l'utilisateur clique sur l'icône de suppression et confirme.
+    \item Le système enregistre l'opération et met à jour l'affichage.
+\end{enumerate} \\
+\hline
+\textbf{Scénario alternatif} &
+\begin{enumerate}[start=1, label=\arabic*.]
+    \item Si les données sont invalides (permis expiré, champ vide), un message d'erreur est affiché.
+    \item Si l'utilisateur n'a pas le rôle requis, le système retourne une erreur 403.
+\end{enumerate} \\
+\hline
+\caption{Description textuelle --- Gérer les chauffeurs (Sprint 1)}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}
+
+\subsection{Diagramme de classes}
+
+\newpage
+\thispagestyle{empty}
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, height=0.95\textheight, keepaspectratio]{img/diagrammes/DiagrammeCorrige}
+\caption{Diagramme de classes du Sprint 1}
+\label{fig:class-diagram-sp1}
+\end{figure}
+\end{landscape}
+
+% =============================================================
+\section{Réalisation}
+% =============================================================
+
+\subsection{Sécurité : Authentification et RBAC}
+La sécurité applicative repose sur deux composants :
+\begin{itemize}
+    \item[$\bullet$] \textbf{WfmsAuthFilter :} Filtre qui intercepte les requêtes, déchiffre le token RSA WFMS et injecte l'identité de l'utilisateur.
+    \item[$\bullet$] \textbf{RoleInterceptor + @RoleRequired :} Vérifie le rôle requis via l'héritage polymorphique des entités FleetUser.
+\end{itemize}
+
+\subsection{Tableau de bord et authentification}
+
+L'authentification passe par WFMS. Chaque acteur est redirigé vers son tableau de bord avec KPIs en temps réel.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_dashboard_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_dashboard_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_dashboard\_composite]}\vspace{4cm}}}%
+}
+\caption{Tableau de bord Fleet~AI : KPIs administrateur et connexion WFMS}
+\label{fig:sp1-dashboard}
+\end{figure}
+
+\subsection{Gestion des utilisateurs}
+
+L'Administrateur crée, modifie et désactive des comptes utilisateurs, en assignant l'un des six rôles disponibles : AD, MG, PL, CH, REC, CL. Un compte désactivé perd immédiatement tout accès.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_users_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_users_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_users\_composite]}\vspace{4cm}}}%
+}
+\caption{Gestion des utilisateurs : liste par rôle et formulaire de création}
+\label{fig:sp1-users}
+\end{figure}
+
+\subsection{Gestion des véhicules}
+
+Chaque véhicule est défini par son immatriculation, ses capacités (poids, volume), son statut et sa zone d'affectation. Le suivi des coûts et de l'historique kilométrique est intégré.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_vehicles_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_vehicles_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_vehicles\_composite]}\vspace{4cm}}}%
+}
+\caption{Gestion des véhicules : statuts, capacités et formulaire d'ajout}
+\label{fig:sp1-vehicles}
+\end{figure}
+
+\subsection{Gestion des chauffeurs}
+
+Le cycle de vie complet est couvert : création avec type de permis (B, C, CE, D, DE), zone d'affectation et contrat (Officiel / Prestataire). Le score global est calculé automatiquement à partir de trois coefficients configurables.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_drivers_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_drivers_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_drivers\_composite]}\vspace{4cm}}}%
+}
+\caption{Gestion des chauffeurs : score, performance et type de permis}
+\label{fig:sp1-drivers}
+\end{figure}
+
+\subsection{Gestion des zones géographiques}
+
+La gestion des zones permet de définir les périmètres de livraison. Deux types de zones sont supportés : \texttt{STATE\_BASED} (24 gouvernorats tunisiens) et \texttt{MANUAL\_POLYGON} (zones dessinées librement sur carte Leaflet). La détection automatique de zone s'effectue lors de l'ajout d'une adresse client.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_zones_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_zones_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_zones\_composite]}\vspace{4cm}}}%
+}
+\caption{Gestion des zones : périmètres et éditeur de polygone Leaflet}
+\label{fig:sp1-zones}
+\end{figure}
+
+\subsection{Journal d'audit et sauvegardes}
+
+Toutes les actions critiques sont enregistrées automatiquement dans le journal d'audit avec double stockage PostgreSQL et MongoDB. L'Administrateur filtre le journal par date, utilisateur et action. La fonctionnalité de sauvegarde déclenche une copie complète de la base.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_audit_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_audit_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_audit\_composite]}\vspace{4cm}}}%
+}
+\caption{Journal d'audit filtrable et déclenchement de sauvegarde}
+\label{fig:sp1-audit}
+\end{figure}
+
+\subsection{Centre de notifications}
+
+Le système intègre un centre de notifications temps réel (WebSocket). Les utilisateurs configurent leurs préférences (push in-app) par type d'événement.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_notifications_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_notifications_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_notifications\_composite]}\vspace{4cm}}}%
+}
+\caption{Centre de notifications WebSocket et préférences}
+\label{fig:sp1-notifications}
+\end{figure}
+
+% =============================================================
+\section{Tests}
+% =============================================================
+
+Afin de garantir la fiabilité et la robustesse des fonctionnalités développées dès les fondations du projet, une validation rigoureuse a été mise en place à l'aide de tests unitaires.
+
+\begin{itemize}
+    \item \textbf{Les Tests Unitaires :} Ils permettent de valider le comportement précis d'un composant logiciel ou d'une méthode de manière totalement isolée, indépendamment du reste du système.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp1_test_junit.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_test_junit}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp1\_test\_junit.png]}\vspace{4cm}}}%
+}
+\caption{Exemple d'un test unitaire et résultat d'exécution (Succès)}
+\label{fig:sp1-test}
+\end{figure}
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+Le Sprint~1 livre les fondations de Fleet~AI : authentification unifiée via la passerelle WFMS, contrôle d'accès par rôles, gestion complète des référentiels opérationnels (utilisateurs, véhicules, chauffeurs, zones) et journal d'audit avec double persistance. L'application mobile Flutter permet au Chauffeur de consulter son profil et ses performances. Ces composants constituent la base sur laquelle reposent tous les sprints suivants.

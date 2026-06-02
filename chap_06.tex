@@ -1,0 +1,209 @@
+\chapter{Sprint 3 : Planification \& Optimisation des Livraisons}
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+Le Sprint~3 introduit la planification des tournées : affectation manuelle des commandes, création de plans journaliers et récurrents, et gestion des disponibilités des chauffeurs.
+
+\clearpage
+
+\section{Sprint Backlog}
+
+\textbf{Objectif du sprint :} L'affectation manuelle et la planification des tournées sont opérationnelles. Le Planificateur crée des plans journaliers, gère la charge des chauffeurs, définit des règles d'incompatibilité et génère les bons de chargement. Le Chauffeur consulte ses livraisons du jour et son itinéraire depuis l'application mobile. Le suivi GPS en temps réel durant l'exécution terrain sera couvert au Sprint~4.
+
+\input{sprint_backlog_3}
+
+% =============================================================
+\section{Conception}
+% =============================================================
+
+\subsection{Diagramme de cas d'utilisation}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/diagrammes/sprint_3_usecase_p1.png}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase_p1}%
+}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase}%
+}
+\caption{Diagramme de cas d'utilisation du Sprint~3 --- Partie~1}
+\label{fig:cas-utilisation-sp3-p1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/diagrammes/sprint_3_usecase_p2.png}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase_p2}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_3\_usecase\_p2.png]}\vspace{4cm}}}%
+}
+\caption{Diagramme de cas d'utilisation du Sprint~3 --- Partie~2}
+\label{fig:cas-utilisation-sp3-p2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/diagrammes/sprint_3_usecase_p3.png}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase_p3}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_3\_usecase\_p3.png]}\vspace{4cm}}}%
+}
+\caption{Diagramme de cas d'utilisation du Sprint~3 --- Partie~3}
+\label{fig:cas-utilisation-sp3-p3}
+\end{figure}
+
+\subsection{Description textuelle}
+
+Le diagramme de cas d'utilisation du Sprint~3 implique deux acteurs métier principaux --- le \textbf{Planificateur} et le \textbf{Chauffeur} --- ainsi que trois systèmes externes : \textbf{WFMS} (authentification), \textbf{ETL / ERP Poulina} (synchronisation des données historiques) et \textbf{OR-Tools VRP} (moteur d'optimisation d'itinéraires). La carte est rendue via \textbf{TomTom / Leaflet}.
+
+\captionsetup[longtable]{justification=centering}
+\setlength{\arrayrulewidth}{1pt}
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+\rowcolor{headerbg}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+\textbf{Titre} & Planification et gestion des tournées \\
+\hline
+\textbf{Acteurs} & Planificateur, Chauffeur, ETL / ERP Poulina, TomTom / Leaflet \\
+\hline
+\textbf{Objectif} & Permettre au Planificateur de créer des plans de livraison journaliers et récurrents, de gérer la charge des chauffeurs, de contrôler les capacités véhicules et de générer les bons de chargement. \\
+\hline
+\textbf{Précondition} & Les commandes sont au statut PRÊTE. Le Planificateur est authentifié via WFMS. Les données historiques ERP sont synchronisées. \\
+\hline
+\textbf{Postcondition} & Le plan est validé, les commandes passent à AFFECTÉE et les parties prenantes (Chauffeur, REC, Client) sont notifiées. \\
+\hline
+\textbf{Scénario nominal} &
+\begin{enumerate}[start=1, label=\arabic*.]
+    \item Le Planificateur s'authentifie via WFMS et accède à l'interface de planification.
+    \item Il crée un plan de livraison quotidien en sélectionnant les commandes prêtes.
+    \item Il consulte la charge des chauffeurs disponibles et assigne commandes/véhicules.
+    \item Le système vérifie la capacité du véhicule (poids et volume) à chaque affectation.
+    \item Le Planificateur consulte la charge et la capacité restante de chaque chauffeur et véhicule ; les indicateurs de surcharge s'affichent en temps réel.
+    \item Il définit les règles d'incompatibilité chauffeur-zone et configure des plans récurrents hebdomadaires.
+    \item Après validation, le bon de chargement PDF est généré et les parties prenantes sont notifiées.
+    \item Le Chauffeur consulte ses livraisons du jour et son itinéraire sur la carte mobile (TomTom / Leaflet).
+\end{enumerate} \\
+\hline
+\textbf{Scénario alternatif} &
+\begin{enumerate}[start=1, label=\arabic*.]
+    \item Aucun chauffeur disponible : le Planificateur peut définir des contraintes de non-affectation ou reprogrammer les livraisons échouées à J+1.
+    \item Capacité véhicule dépassée : l'affectation est bloquée avec message explicite.
+    \item Règle d'incompatibilité chauffeur-zone : une alerte est levée ; l'affectation est refusée.
+    \item Livraison échouée : le Planificateur la reprogramme en priorité le lendemain.
+\end{enumerate} \\
+\hline
+\caption{Description textuelle --- Planification et gestion des tournées (Sprint 3)}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}
+
+\subsection{Diagramme de classes}
+
+\newpage
+\thispagestyle{empty}
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, height=0.95\textheight, keepaspectratio]{img/diagrammes/sprint_3_classes}
+\caption{Diagramme de classes du Sprint 3}
+\label{fig:diag-classes-sp3}
+\end{figure}
+\end{landscape}
+
+% =============================================================
+\section{Réalisation}
+% =============================================================
+
+\subsection{Affectation manuelle et gestion de la charge}
+
+Le Planificateur sélectionne les commandes au statut PRÊTE et les affecte à un chauffeur et un véhicule disponibles. Le système vérifie en temps réel la disponibilité, la capacité restante et les règles d'incompatibilité chauffeur-zone.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp3_planning_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_planning_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp3\_planning\_composite]}\vspace{4cm}}}%
+}
+\caption{Planification : commandes prêtes, charge chauffeurs et surcharge}
+\label{fig:sp3-manual}
+\end{figure}
+
+% NOTE : Les suggestions d'itinéraires optimisées (OR-Tools / IA) sont traitées dans le Sprint 5 (chap_08.tex).
+
+% NOTE : Le suivi GPS en temps réel et le tableau de bord KPI journalier sont traités dans le Sprint~4
+% (section Suivi GPS et tableau de bord de pilotage), car ils relèvent de la phase d'exécution terrain.
+
+\subsection{Gestion de la disponibilité des chauffeurs}
+
+Le système \texttt{resolveWeeklySchedule()} calcule automatiquement le planning hebdomadaire selon le type de contrat : les Officiels sont automatiquement DISPONIBLE du lundi au vendredi, les Prestataires doivent déclarer leur disponibilité. Les absences (CONGE, MALADIE, FORMATION, MISSION) et les JOUR\_FERIE ont la priorité sur toutes les règles.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth, keepaspectratio]{img/capture/mobile/disponibilite_chauffeur}
+\caption{App mobile --- Gestion de la disponibilité}
+\label{fig:sp3-availability}
+\end{figure}
+
+\subsection{Plans de livraison et bons de chargement}
+
+Le Planificateur regroupe plusieurs commandes par chauffeur dans un plan journalier. Le système calcule les distances estimées (Haversine) et la charge par véhicule. Un bon de chargement listant les articles par commande est générable en un clic.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp3_plans_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_plans_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp3\_plans\_composite]}\vspace{4cm}}}%
+}
+\caption{Plans journaliers et bon de chargement PDF}
+\label{fig:sp3-plans}
+\end{figure}
+
+\subsection{Application mobile Chauffeur --- Itinéraire du jour}
+
+Après validation du plan par le Planificateur, le Chauffeur reçoit son itinéraire sur l'application mobile Fleet~AI (Flutter). Les points de livraison sont affichés numérotés dans l'ordre optimal sur la carte, avec navigation intégrée vers chaque adresse.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.46\linewidth}
+  \centering
+  \IfFileExists{img/capture/mobile/itineraire_flutter.png}{%
+    \includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/itineraire_flutter.png}%
+  }{%
+    \fbox{\parbox{0.9\linewidth}{\centering\vspace{3.5cm}\textit{Manque: itineraire\_flutter.png}\vspace{3.5cm}}}%
+  }
+  \caption{Itinéraire optimisé sur carte (Flutter)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.46\linewidth}
+  \centering
+  \IfFileExists{img/capture/mobile/liste_livraisons_flutter.png}{%
+    \includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/liste_livraisons_flutter.png}%
+  }{%
+    \fbox{\parbox{0.9\linewidth}{\centering\vspace{3.5cm}\textit{Manque: liste\_livraisons\_flutter.png}\vspace{3.5cm}}}%
+  }
+  \caption{Liste des livraisons du jour (Flutter)}
+\end{subfigure}
+\caption{Application mobile Chauffeur --- Itinéraire et liste des livraisons du jour}
+\label{fig:sp3-mobile}
+\end{figure}
+
+% =============================================================
+\section{Tests}
+% =============================================================
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp3_test_postman.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_test_postman}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp3\_test\_postman.png]}\vspace{4cm}}}%
+}
+\caption{Exécution d'un test d'intégration avec Postman pour l'API de création de mission}
+\label{fig:sp3-test}
+\end{figure}
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+Le Sprint~3 livre le moteur de planification opérationnel de Fleet~AI : affectation manuelle avec contrôle de capacité, gestion des disponibilités des chauffeurs, plans journaliers et récurrents avec génération de bons de chargement. Le suivi GPS et le tableau de bord de pilotage durant l'exécution terrain sont détaillés dans le Sprint~4. Les fonctionnalités d'intelligence artificielle seront déployées dans le Sprint~5.

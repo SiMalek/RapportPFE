@@ -1,0 +1,155 @@
+\definecolor{headerbg}{HTML}{d5f5e3}
+\setlength{\arrayrulewidth}{1pt}
+
+Les story points (SP) sont estimés selon la suite de Fibonacci. L'échelle retenue est : 1--2 (tâche simple), 3--5 (complexité modérée), 8--13 (tâche complexe ou incertaine). Ce sprint totalise \textbf{27 stories, 89 SP}.
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.5cm}|c|}
+\hline
+\rowcolor{headerbg}
+\textbf{User Story} & \textbf{Tâche} & \textbf{Critères d'acceptation} & \textbf{\rotatebox{90}{SP}} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{headerbg}
+\textbf{User Story} & \textbf{Tâche} & \textbf{Critères d'acceptation} & \textbf{\rotatebox{90}{SP}} \\
+\hline
+\endhead
+\hline
+\endfoot
+
+%------ US-094 ------
+\multirow{2}{=}{En tant que Responsable des Engagements Clients (REC), je veux gérer le référentiel clients afin de maintenir une base clients à jour.}
+& Permettre au REC de créer, modifier et rechercher des clients avec pagination et filtres par nom et code. & Le CRUD complet fonctionne ; la recherche par nom et code est opérationnelle ; pagination et tri intégrés. & 3 \\
+\cline{2-4}
+& Mettre à disposition du REC une interface de gestion des clients avec liste et formulaire de création. & La liste des clients s'affiche avec filtres ; le formulaire de création/édition fonctionne. & 2 \\
+\hline
+
+%------ US-095 ------
+\multirow{2}{=}{En tant que Responsable des Engagements Clients, je veux gérer les adresses de livraison de mes clients afin d'assurer des livraisons précises à chaque emplacement.}
+& Permettre au REC d'ajouter, modifier et supprimer les adresses de livraison de ses clients avec localisation géographique automatique. & Ajout, modification, suppression d'adresses ; la zone de livraison est détectée automatiquement selon les coordonnées. & 3 \\
+\cline{2-4}
+& Permettre la désignation d'une adresse par défaut et la détection des doublons géographiques. & Une adresse peut être marquée par défaut ; les adresses en doublon sont signalées. & 2 \\
+\hline
+
+%------ US-096 ------
+\multirow{2}{=}{En tant que REC, je veux consulter l'historique complet d'un client afin de piloter la relation client.}
+& Rassembler pour le REC l'ensemble des commandes, paiements et réclamations d'un client dans une vue unifiée. & La vue agrège les commandes passées, les paiements effectués et les réclamations ouvertes ; filtrable par période. & 3 \\
+\cline{2-4}
+& Organiser l'historique client en sections distinctes consultables depuis la fiche client. & Les sections Commandes, Paiements et Réclamations s'affichent avec les données correctes. & 2 \\
+\hline
+
+%------ US-097 ------
+\multirow{2}{=}{En tant que REC, je veux bloquer un client afin de suspendre ses commandes en cas de litige.}
+& Permettre au REC de bloquer un client avec saisie obligatoire du motif et notification automatique au client. & Le blocage est immédiat avec motif obligatoire ; le client est notifié automatiquement. & 2 \\
+\cline{2-4}
+& Demander une confirmation au REC avant l'action de blocage avec saisie du motif obligatoire. & La confirmation exige un motif non vide avant validation ; le statut est mis à jour dans la liste. & 1 \\
+\hline
+
+%------ US-098 ------
+\multirow{2}{=}{En tant que REC, je veux débloquer un client précédemment bloqué en conservant l'historique de blocage.}
+& Permettre au REC de débloquer un client ; l'historique complet des blocages est conservé et consultable. & Le déblocage réactive le compte client ; l'historique des blocages est conservé et consultable. & 2 \\
+\cline{2-4}
+& Afficher l'option de déblocage uniquement pour les clients bloqués, avec traçabilité de l'action. & L'option de déblocage est visible uniquement pour les clients bloqués ; l'action est tracée dans le journal. & 1 \\
+\hline
+
+%------ US-100 ------
+\multirow{2}{=}{En tant que Responsable des Engagements Clients, je veux que la création d'une commande soit refusée pour un client bloqué afin d'éviter toute expédition non autorisée.}
+& Vérifier systématiquement le statut de blocage du client avant d'accepter la création d'une commande. & Toute tentative de commande pour un client bloqué est refusée avec un message explicite au REC. & 2 \\
+\cline{2-4}
+& Afficher un message d'erreur clair au REC lors de la tentative de création de commande pour un client bloqué. & Le message d'erreur est clair ; la soumission du formulaire est bloquée tant que le client reste suspendu. & 1 \\
+\hline
+
+%------ US-102 ------
+\multirow{2}{=}{En tant que REC, je veux définir un niveau de service par client afin de garantir le respect des engagements contractuels.}
+& Permettre au REC de définir et mettre à jour le niveau de service (standard, express, premium) par client, avec alerte si le délai est dépassé. & Les niveaux de service sont enregistrés par client ; une alerte est déclenchée si le délai garanti est dépassé. & 2 \\
+\cline{2-4}
+& Afficher le niveau de service dans la fiche client avec un indicateur visuel coloré. & L'indicateur de niveau de service est visible sur la fiche client et dans la liste. & 1 \\
+\hline
+
+%------ US-103 ------
+\multirow{2}{=}{En tant que Client, je veux noter le service et le chauffeur après une livraison depuis l'application mobile.}
+& Permettre au Client de noter le service et le chauffeur (1 à 5 étoiles) après chaque livraison, avec commentaire optionnel. & Le Client peut noter le service après chaque livraison ; un seul avis est possible par livraison. & 2 \\
+\cline{2-4}
+& Enregistrer la notation et recalculer la moyenne globale du chauffeur visible par le Manager. & La note est enregistrée et la moyenne recalculée ; visible par le Manager. & 1 \\
+\hline
+
+%------ US-007b ------
+\multirow{2}{=}{En tant que REC, je veux créer une commande avec vérification de la disponibilité du stock afin d'éviter les ruptures.}
+& Vérifier la disponibilité du stock au moment de la création de la commande et refuser si le stock est insuffisant. & La création vérifie le stock disponible ; la commande est refusée si le stock est insuffisant, avec message explicite. & 3 \\
+\cline{2-4}
+& Afficher au REC la quantité disponible par article lors de la saisie de la commande. & Le formulaire affiche le stock disponible ; la soumission est bloquée si le stock est insuffisant. & 2 \\
+\hline
+
+%------ US-008b ------
+\multirow{2}{=}{En tant que Planificateur, je veux que le système suive le cycle de vie complet d'une commande afin d'assurer la traçabilité de bout en bout.}
+& Implémenter la gestion des transitions d'état de la commande selon un enchaînement strict (créée, acceptée, envoyée, prête, affectée, en cours, livrée ou échouée). & Les transitions sont validées dans l'ordre prévu ; chaque changement est tracé avec l'acteur et la date. & 5 \\
+\cline{2-4}
+& Afficher visuellement l'avancement de la commande étape par étape dans l'interface du Planificateur. & Chaque changement de statut est visible ; des notifications sont envoyées aux parties prenantes concernées. & 3 \\
+\hline
+
+%------ US-009b ------
+\multirow{2}{=}{En tant que Client, je veux consulter le statut de mes commandes afin de suivre mes livraisons.}
+& Permettre au Client de consulter l'état actuel de chaque commande depuis l'application mobile. & Le Client voit le statut actuel de chaque commande ; l'affichage est mis à jour en temps réel. & 3 \\
+\cline{2-4}
+& Afficher au Client l'historique des changements de statut de sa commande sous forme de chronologie. & L'historique des transitions de statut est visible sous forme de chronologie. & 2 \\
+\hline
+
+%------ US-010b ------
+\multirow{2}{=}{En tant que Client, je veux annuler une commande avant son expédition depuis l'application mobile.}
+& Permettre au Client d'annuler une commande uniquement si elle n'a pas encore été expédiée ou affectée. & Le Client peut annuler ; l'annulation est refusée si la commande est déjà affectée ou expédiée. & 2 \\
+\cline{2-4}
+& Afficher le bouton d'annulation uniquement si le statut de la commande le permet, avec confirmation obligatoire. & Le bouton est visible uniquement si le statut autorise l'annulation ; confirmation requise. & 1 \\
+\hline
+
+%------ US-011b ------
+\multirow{2}{=}{En tant que Planificateur, je veux voir les commandes en attente d'affectation triées par priorité afin d'organiser le traitement.}
+& Mettre à disposition du Planificateur la liste des commandes prêtes à être affectées, triées par priorité et par date. & La liste des commandes en attente est accessible au Planificateur ; tri par priorité et par date. & 2 \\
+\cline{2-4}
+& Permettre au Planificateur de filtrer les commandes en attente par plusieurs critères. & Les filtres multiples fonctionnent ; les résultats sont paginés. & 1 \\
+\hline
+
+%------ US-012b ------
+\multirow{2}{=}{En tant que REC, je veux consulter le stock réel disponible afin de gérer les commandes en conséquence.}
+& Permettre au REC de consulter le niveau de stock réel de chaque article en temps réel. & Le stock réel est consultable ; distinction claire entre stock réel et stock publié. & 2 \\
+\cline{2-4}
+& Afficher au REC un indicateur de disponibilité par article avec mise à jour en temps réel. & L'affichage distingue le stock réel et le stock publié ; l'indicateur est actualisé en continu. & 1 \\
+\hline
+
+%------ US-013b ------
+\multirow{2}{=}{En tant que Client, je veux consulter le stock disponible afin de passer commande en connaissance de cause.}
+& Permettre au Client de consulter uniquement le stock publié par le REC, sans accès au stock réel. & Le Client voit uniquement le stock publié défini par le REC ; le stock réel n'est jamais exposé. & 2 \\
+\cline{2-4}
+& Afficher au Client le catalogue d'articles avec le stock publié par article. & L'affichage du catalogue est clair ; le stock publié est visible par article. & 1 \\
+\hline
+
+%------ US-014b ------
+\multirow{2}{=}{En tant que REC, je veux définir le stock visible par les clients afin de contrôler les informations publiées.}
+& Permettre au REC de définir le stock publié par article, dans la limite du stock réel disponible. & Le REC peut définir le stock publié ; la valeur publiée ne peut pas dépasser le stock réel. & 2 \\
+\cline{2-4}
+& Mettre à jour immédiatement le stock visible par les clients après publication par le REC. & La mise à jour est immédiate ; les clients voient instantanément les nouvelles valeurs publiées. & 1 \\
+\hline
+
+%------ US-104 (Affectation REC-Client) ------
+\multirow{2}{=}{En tant que Manager, je veux assigner des clients à un Responsable des Engagements Clients afin de structurer les responsabilités commerciales.}
+& Permettre au Manager d'affecter et désaffecter des clients à un REC, avec contrainte d'unicité d'affectation. & L'affectation est enregistrée ; un client ne peut être assigné qu'à un seul REC à la fois. & 3 \\
+\cline{2-4}
+& Permettre au Manager de gérer les affectations en lot depuis une interface dédiée. & L'interface permet d'assigner et désassigner des clients en lot. & 2 \\
+\hline
+
+%------ US-109 (Dashboard Manager) ------
+\multirow{2}{=}{En tant que Manager, je veux comparer les performances par zone afin d'identifier les zones à améliorer.}
+& Calculer les indicateurs de performance agrégés par zone (taux de livraison, délais moyens) et les exposer au Manager. & Les indicateurs sont calculés par zone et disponibles pour la visualisation. & 3 \\
+\cline{2-4}
+& Afficher au Manager une vue comparative des performances par zone, filtrable par période. & La vue des performances par zone s'affiche avec filtres par période. & 2 \\
+\hline
+
+%------ US-111/115 ------
+\multirow{2}{=}{En tant qu'utilisateur, je veux recevoir des notifications à chaque étape du workflow afin de rester informé des événements importants.}
+& Développer le service de notifications multicanal (notifications dans l'application, par email) couvrant les principales étapes du workflow. & Les notifications sont reçues rapidement après chaque événement déclencheur. & 3 \\
+\cline{2-4}
+& Configurer les modèles de notification par type d'événement (affectation, livraison, paiement, réclamation). & Chaque transition de statut déclenche une notification adaptée au rôle du destinataire. & 2 \\
+\hline
+
+\caption{Sprint Backlog du Sprint 2 --- Données Métier, Commandes \& Client Mobile (27 stories, 89 SP)}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}

@@ -1,0 +1,79 @@
+\definecolor{headerbg}{HTML}{d5f5e3}
+\setlength{\arrayrulewidth}{1pt}
+
+Les story points (SP) sont estimés selon la suite de Fibonacci. L'échelle retenue est : 1--2 (tâche simple), 3--5 (complexité modérée), 8--13 (tâche complexe ou incertaine). Ce sprint, 100\% orienté intelligence artificielle, totalise \textbf{8 stories, 47 SP}.
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.5cm}|c|}
+\hline
+\rowcolor{headerbg}
+\textbf{User Story} & \textbf{Tâche} & \textbf{Critères d'acceptation} & \textbf{\rotatebox{90}{SP}} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{headerbg}
+\textbf{User Story} & \textbf{Tâche} & \textbf{Critères d'acceptation} & \textbf{\rotatebox{90}{SP}} \\
+\hline
+\endhead
+\hline
+\endfoot
+
+%------ US-078 ------
+\multirow{2}{=}{En tant que Planificateur, je veux des prédictions de la demande par zone et par jour dans mon tableau de bord afin d'anticiper les besoins en flotte.}
+& Entraîner un modèle de prédiction de la demande à partir des données historiques de livraisons et le déployer dans le système. & Le modèle prédit la demande 7 jours à l'avance avec une précision jugée acceptable par l'équipe. & 8 \\
+\cline{2-4}
+& Afficher les prédictions de demande par zone et par jour dans le tableau de bord du Planificateur sous forme de graphique. & Les prédictions par zone et par jour sont affichées sous forme de graphique consultable. & 5 \\
+\hline
+
+%------ US-079 ------
+\multirow{2}{=}{En tant que Planificateur, je veux des prédictions de retard pour chaque tournée dans mon tableau de bord afin d'agir préventivement.}
+& Développer un modèle d'identification des tournées à risque de retard à partir des données historiques et des conditions opérationnelles. & Le modèle identifie les tournées à risque avec un taux de détection acceptable. & 5 \\
+\cline{2-4}
+& Afficher les tournées à risque avec un indicateur de confiance dans le tableau de bord du Planificateur. & Les tournées à risque sont mises en évidence avec un indicateur de niveau de risque (faible/moyen/élevé). & 3 \\
+\hline
+
+%------ US-080 ------
+\multirow{2}{=}{En tant que Manager, je veux voir le niveau de confiance des prédictions dans mon tableau de bord afin de calibrer ma prise de décision.}
+& Intégrer un indicateur de confiance à chaque prédiction exposée dans le tableau de bord Manager. & Chaque prédiction expose un niveau de confiance visible dans le tableau de bord. & 2 \\
+\cline{2-4}
+& Afficher l'indicateur de confiance par un repère visuel coloré sur chaque prédiction. & L'indicateur est visible sur chaque prédiction dans le tableau de bord. & 1 \\
+\hline
+
+%------ US-081 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux que les modèles de prédiction soient réentraînés automatiquement périodiquement afin de maintenir leur précision.}
+& Configurer un réentraînement automatique périodique des modèles de prédiction selon un calendrier défini. & Le réentraînement se déclenche automatiquement selon le calendrier configuré. & 3 \\
+\cline{2-4}
+& Alerter automatiquement le Manager si les indicateurs de performance des modèles se dégradent après réentraînement. & Une alerte est envoyée au Manager si la précision du modèle descend sous le seuil acceptable. & 2 \\
+\hline
+
+%------ US-082 ------
+\multirow{2}{=}{En tant que Manager, je veux comparer les prédictions avec les réalisations dans mon tableau de bord afin d'évaluer la fiabilité du modèle.}
+& Calculer et exposer au Manager l'écart entre les prédictions et les réalisations par zone et par semaine. & Le tableau comparatif affiche l'écart moyen par semaine et par zone. & 3 \\
+\cline{2-4}
+& Afficher la comparaison prédictions/réalisations avec filtres par période et par zone dans le tableau de bord. & Le graphique comparatif s'affiche avec filtres par période et par zone. & 2 \\
+\hline
+
+%------ US-083 ------
+\multirow{2}{=}{En tant que Planificateur, je veux des recommandations pour le dimensionnement de la flotte dans mon tableau de bord afin d'optimiser le nombre de véhicules par zone.}
+& Générer des recommandations de dimensionnement de flotte basées sur la demande prédite par zone. & Le système suggère le nombre optimal de véhicules par zone selon la demande prédite. & 3 \\
+\cline{2-4}
+& Afficher les recommandations de dimensionnement dans le tableau de bord avec comparaison face à la flotte actuelle. & Les recommandations sont affichées avec comparaison par rapport à la flotte existante. & 2 \\
+\hline
+
+
+%------ US-144 ------
+\multirow{2}{=}{En tant que Manager, je veux interroger la base de données en langage naturel via un chatbot afin d'obtenir des analyses personnalisées.}
+& Intégrer un modèle LLM local (Gemma) avec un pipeline Text-to-SQL pour traduire les questions en requêtes de base de données. & Le modèle génère des requêtes SQL valides correspondant aux intentions des utilisateurs. & 3 \\
+\cline{2-4}
+& Afficher l'interface de conversation dans l'application web avec historique des questions-réponses. & L'interface de chat est fonctionnelle ; l'historique est sauvegardé. & 2 \\
+\hline
+
+%------ US-145 ------
+\multirow{2}{=}{En tant qu'Administrateur, je veux que le chatbot sécurise l'accès aux données selon le rôle de l'utilisateur afin de garantir la confidentialité.}
+& Implémenter un validateur SQL (SQL Validator) pour bloquer les opérations d'écriture et vérifier les accès aux tables. & Le chatbot refuse toute requête DML ou DDL ; seules les tables autorisées sont interrogées. & 2 \\
+\cline{2-4}
+& Appliquer la sécurité au niveau des lignes (RLS) pour limiter les résultats au périmètre de l'utilisateur courant. & Les résultats sont filtrés selon le rôle (ex: le Manager ne voit que les stats de son périmètre). & 1 \\
+\hline
+
+\caption{Sprint Backlog du Sprint 5 --- Prédictions IA \& Chatbot Conversationnel (8 stories, 47 SP)}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}

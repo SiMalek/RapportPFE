@@ -1,0 +1,67 @@
+\makeatletter
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{center}
+
+% ---- En-tête institutionnel ----
+{\large \textbf{République Tunisienne}}\\[2pt]
+{\normalsize Ministère de l'Enseignement Supérieur et de la Recherche Scientifique}\\[2pt]
+{\normalsize Direction Générale des Études Technologiques}\\[4pt]
+
+% ---- Logo ISET ----
+\includegraphics[height=2cm]{img/logo/logo_iset_rades}
+\vspace{0.1cm}
+
+{\Large \textbf{Institut Supérieur des Études Technologiques de Radès}}\\[2pt]
+{\normalsize Département Technologies de l'Informatique}\\[8pt]
+
+\rule{0.8\textwidth}{1.2pt}\\[8pt]
+
+% ---- Titre du rapport ----
+{\LARGE \textbf{Rapport de Projet de Fin d'Études}}\\[4pt]
+{\large Présenté en vue de l'obtention du diplôme de}\\[2pt]
+{\large \textbf{\@diplomaName}}\\[2pt]
+{\normalsize Spécialité : \textbf{\@speciality}}\\[8pt]
+
+\rule{0.8\textwidth}{0.6pt}\\[8pt]
+
+% ---- Sujet ----
+{\huge \textcolor{pghGreen}{\textbf{\@title}}}\\[10pt]
+
+\rule{0.8\textwidth}{0.6pt}\\[8pt]
+
+% ---- Entreprise d'accueil ----
+{\large Entreprise d'accueil : \textbf{\@companyName}}\\[4pt]
+\includegraphics[height=2.5cm]{img/logo/logo_grepsys}
+
+\vspace{0.3cm}
+
+% ---- Auteurs et encadrants ----
+\begin{minipage}[t]{0.45\textwidth}
+\begin{flushleft}
+{\textbf{Élaboré par :}}\\[4pt]
+\@author\\
+\@secondAuthor
+\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\begin{flushright}
+{\textbf{Encadré par :}}\\[4pt]
+\@academicFramerName\\
+{\small \@academicFramerSpeciality}\\[4pt]
+\@proFramerName\\
+{\small \@proFramerSpeciality}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% ---- Année universitaire ----
+\rule{0.6\textwidth}{0.6pt}\\[6pt]
+{\large Année Universitaire : \textbf{\@collegeYear}}
+
+\end{center}
+\end{titlepage}
+\makeatother

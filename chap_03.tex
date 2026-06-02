@@ -1,0 +1,582 @@
+\chapter{Méthodologie et environnement de travail}
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+Ce chapitre décrit les choix méthodologiques et techniques du projet : pourquoi Scrum, comment le Product Backlog est structuré, quels outils et quelle architecture ont été retenus.
+
+% =============================================================
+\section{Choix de la méthode de gestion de projet}
+% =============================================================
+
+\subsection{Les méthodes de gestion de projet}
+Deux grandes familles de méthodes s'offrent pour la gestion d'un tel projet : Agile et Traditionnelle.
+
+\definecolor{headerbg}{HTML}{d5f5e3}
+\setlength{\arrayrulewidth}{1pt}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{6.5cm}|}
+\hline
+\rowcolor{headerbg}
+\textbf{Méthode} & \textbf{Avantages} & \textbf{Inconvénients} \\
+\hline
+\endfirsthead
+\endfoot
+
+\textbf{Agile}
+&
+\begin{itemize}[left=0pt, topsep=0pt, itemsep=0pt, parsep=0pt, partopsep=0pt]
+    \item[$\bullet$] Flexibilité
+    \item[$\bullet$] Livraisons fréquentes
+    \item[$\bullet$] Collaboration renforcée
+    \item[$\bullet$] Amélioration continue
+    \item[$\bullet$] Réduction des risques
+\end{itemize}
+&
+\begin{itemize}[left=0pt, topsep=0pt, itemsep=0pt, parsep=0pt, partopsep=0pt]
+    \item[$\bullet$] Moins de prévisibilité
+    \item[$\bullet$] Documentation limitée
+    \item[$\bullet$] Dépendance à l'implication du client
+    \item[$\bullet$] Risque de dérive du périmètre
+\end{itemize}
+\\
+\hline
+
+\textbf{Traditionnelle}
+&
+\begin{itemize}[left=0pt, topsep=0pt, itemsep=0pt, parsep=0pt, partopsep=0pt]
+    \item[$\bullet$] Planification détaillée
+    \item[$\bullet$] Budget et délais définis
+    \item[$\bullet$] Documentation exhaustive
+    \item[$\bullet$] Structure hiérarchique claire
+\end{itemize}
+&
+\begin{itemize}[left=0pt, topsep=0pt, itemsep=0pt, parsep=0pt, partopsep=0pt]
+    \item[$\bullet$] Rigidité
+    \item[$\bullet$] Livraison tardive
+    \item[$\bullet$] Moins d'implication du client
+    \item[$\bullet$] Risque d'effet tunnel
+\end{itemize}
+\\
+\hline
+
+\caption{Comparaison entre méthode traditionnelle et méthode Agile}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}
+
+\subsection*{Pourquoi Scrum ?}
+Nous avons choisi Scrum car :
+\begin{itemize}
+    \item[$\bullet$] Les besoins de PGH ont évolué en cours de projet (règles de paiement, validation des livraisons), rendant toute planification rigide inadaptée.
+    \item[$\bullet$] Le système est multi-composants (web Angular, mobile Flutter, back-end Spring Boot, IA FastAPI) avec des dépendances fortes entre modules.
+    \item[$\bullet$] Les 4 mois de développement imposaient des livraisons fréquentes et validées à chaque itération par GREPSYS et PGH.
+\end{itemize}
+
+% =============================================================
+\subsection{Méthodologie SCRUM}
+% =============================================================
+
+Le développement s'est organisé autour du cycle de vie Scrum, rythmé par des sprints de deux semaines produisant à chaque itération un incrément fonctionnel livrable. \cite{scrum_guide}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\linewidth]{img/logo/logo_scrum}
+\caption{Le cycle de vie Scrum}
+\label{fig:scrum-cycle}
+\end{figure}
+
+\paragraph*{Rôles Scrum}
+
+\setlength{\arrayrulewidth}{1pt}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\rowcolor{headerbg}
+\textbf{Rôle} & \textbf{Personne(s)} \\
+\hline
+Product Owner & M. Marouen Bouallegui \\
+\hline
+Scrum Master & Mme Lamia Mansouri\\
+\hline
+Équipe de développement & Mohamed Malek Ben Jemaa et Islem Gharsallah \\
+\hline
+\end{tabular}
+\caption{Répartition des rôles Scrum}
+\end{table}
+\setlength{\arrayrulewidth}{0.4pt}
+
+% =============================================================
+\subsection{Product Backlog}
+% =============================================================
+
+Le Product Backlog suivant présente l'ensemble des user stories du projet, organisées en cinq sprints thématiques et priorisées sur une échelle de 1 à 3 (1 étant la priorité maximale).
+
+\input{product_backlog}
+
+% =============================================================
+\section{Planification de projet}
+% =============================================================
+
+Le projet Fleet~AI s'est déroulé sur \textbf{16 semaines} (Février -- Mai~2025), découpées en phases dont la durée reflète la complexité technique de chaque incrément. Le diagramme de Gantt ci-dessous illustre la planification réelle du projet.
+
+
+% ============================================================
+% DIAGRAMME DE GANTT — Fleet AI (Février – Mai 2025)
+% Diagramme dessiné en pur TikZ pour garantir l'affichage
+% des labels à l'intérieur des barres.
+% ============================================================
+
+\definecolor{ganttDark}{RGB}{30,110,50}
+\definecolor{ganttMid}{RGB}{30,110,50}
+\definecolor{ganttBar}{HTML}{d5f5e3}
+\definecolor{ganttBarLight}{HTML}{b7e4c7}
+\definecolor{ganttGrey}{HTML}{e0e0e0}
+\definecolor{ganttGreyDark}{HTML}{646464}
+\definecolor{ganttTextDark}{RGB}{30,110,50}
+\definecolor{ganttTextGrey}{HTML}{444444}
+\definecolor{ganttBg}{HTML}{ffffff}
+\definecolor{ganttRowAlt}{HTML}{f7f7f7}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.55cm, y=0.55cm]
+
+  % Dimensions ajustées :
+  % Colonne de gauche (titres longs) : de 0 à 5.0
+  % Grille des semaines : de 5.1 à 21.1 (16 semaines)
+
+  %% ── Fond général ─────────────────────────────────────────
+  \fill[ganttBg, rounded corners=4pt] (-4.5,-0.5) rectangle (21.2,10.5);
+
+  %% ── Fond alterné des lignes ───────────────────────────────
+  \foreach \row/\col in {7/ganttBg, 6/ganttRowAlt, 5/ganttBg,
+                          4/ganttRowAlt, 3/ganttBg, 2/ganttRowAlt, 1/ganttBg}{
+    \fill[\col] (5.1,\row-1) rectangle (21.1,\row);
+  }
+
+  %% ── En-tête mois ─────────────────────────────────────────
+  \fill[ganttDark,  rounded corners=2pt] (5.1,8)   rectangle (9.1,9);
+  \fill[ganttMid,   rounded corners=2pt] (9.1,8)   rectangle (13.1,9);
+  \fill[ganttDark,  rounded corners=2pt] (13.1,8)  rectangle (17.1,9);
+  \fill[ganttMid,   rounded corners=2pt] (17.1,8)  rectangle (21.1,9);
+
+  \node[text=white, font=\small\bfseries] at (7.1,  8.5) {F\'evrier};
+  \node[text=white, font=\small\bfseries] at (11.1, 8.5) {Mars};
+  \node[text=white, font=\small\bfseries] at (15.1, 8.5) {Avril};
+  \node[text=white, font=\small\bfseries] at (19.1, 8.5) {Mai};
+
+  %% ── En-tête semaines ──────────────────────────────────────
+  \fill[ganttDark!80] (5.1,7) rectangle (21.1,8);
+  \foreach \i in {1,...,16}{
+    \node[text=white, font=\tiny\bfseries]
+      at (5.1+\i-0.5, 7.5) {S\i};
+  }
+
+  %% ── Grille verticale : séparateurs de mois (tiretés) ─────
+  \foreach \x in {9.1, 13.1, 17.1}{
+    \draw[ganttMid!60, dashed, line width=0.6pt] (\x,0) -- (\x,7);
+  }
+
+  %% ── Grille verticale : semaines (très légère) ────────────
+  \foreach \x in {6.1,7.1,8.1, 10.1,11.1,12.1, 14.1,15.1,16.1, 18.1,19.1,20.1}{
+    \draw[ganttDark!12, line width=0.2pt] (\x,0) -- (\x,7);
+  }
+
+  %% ── Grille horizontale ───────────────────────────────────
+  \foreach \y in {0,...,7}{
+    \draw[ganttDark!20, line width=0.3pt] (5.1,\y) -- (21.1,\y);
+  }
+
+  %% ── Labels de lignes (à gauche) - TITRES DES TÂCHES ────
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 6.5) {Analyse \& Conception};
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 5.5) {Gestion des ressources};
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 4.5) {Clients \& Commandes};
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 3.5) {Planification \& Tracking};
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 2.5) {Livraisons \& Paiements};
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 1.5) {IA \& Chatbot};
+  \node[anchor=east, font=\scriptsize\bfseries, text=ganttGreyDark, align=right, text width=4.5cm]
+    at (4.9, 0.5) {Tests \& R\'edaction rapport};
+
+  %% ═══════════════════════════════════════════════════════════
+  %% BARRES DE TÂCHES - "Sprint X" à l'intérieur
+  %% ═══════════════════════════════════════════════════════════
+
+  %% Ligne 7 : Analyse & Conception — S1-S2 (x=5.1, w=2)
+  \fill[ganttGrey, draw=ganttGreyDark, rounded corners=3pt, line width=0.5pt]
+    (5.15, 6.12) rectangle (7.05, 6.88);
+  \node[font=\tiny\bfseries, text=ganttTextGrey, align=center]
+    at (6.1, 6.5) {Phase 1};
+
+  %% Ligne 6 : Sprint 1 — S2-S5 (x=6.1, w=4)
+  \fill[ganttBar, draw=ganttMid, rounded corners=3pt, line width=0.6pt]
+    (6.15, 5.12) rectangle (10.05, 5.88);
+  \node[font=\footnotesize\bfseries, text=ganttTextDark, align=center]
+    at (8.1, 5.5) {Sprint 1};
+
+  %% Ligne 5 : Sprint 2 — S5-S8 (x=9.1, w=3)
+  \fill[ganttBar, draw=ganttMid, rounded corners=3pt, line width=0.6pt]
+    (9.15, 4.12) rectangle (12.05, 4.88);
+  \node[font=\footnotesize\bfseries, text=ganttTextDark, align=center]
+    at (10.6, 4.5) {Sprint 2};
+
+  %% Ligne 4 : Sprint 3 — S7-S10 (x=11.1, w=4)
+  \fill[ganttBar, draw=ganttMid, rounded corners=3pt, line width=0.6pt]
+    (11.15, 3.12) rectangle (15.05, 3.88);
+  \node[font=\footnotesize\bfseries, text=ganttTextDark, align=center]
+    at (13.1, 3.5) {Sprint 3};
+
+  %% Ligne 3 : Sprint 4 — S10-S13 (x=14.1, w=4)
+  \fill[ganttBar, draw=ganttMid, rounded corners=3pt, line width=0.6pt]
+    (14.15, 2.12) rectangle (18.05, 2.88);
+  \node[font=\footnotesize\bfseries, text=ganttTextDark, align=center]
+    at (16.1, 2.5) {Sprint 4};
+
+  %% Ligne 2 : Sprint 5 — S13-S16 (x=17.1, w=4)
+  \fill[ganttBar, draw=ganttMid, rounded corners=3pt, line width=0.6pt]
+    (17.15, 1.12) rectangle (21.05, 1.88);
+  \node[font=\footnotesize\bfseries, text=ganttTextDark, align=center]
+    at (19.1, 1.5) {Sprint 5};
+
+  %% Ligne 1 : Tests & Rapport — S3-S16 (x=7.1, w=14)
+  \fill[ganttBarLight, draw=ganttMid!70, rounded corners=3pt, line width=0.5pt]
+    (7.15, 0.12) rectangle (21.05, 0.88);
+  \node[font=\footnotesize\bfseries, text=ganttTextDark, align=center]
+    at (14.1, 0.5) {Continu};
+
+  %% ── Légende ──────────────────────────────────────────────
+  \fill[ganttBar, draw=ganttMid, rounded corners=1.5pt, line width=0.4pt]
+    (5.1,-0.9) rectangle (5.7,-0.5);
+  \node[anchor=west, font=\tiny, text=ganttGreyDark] at (5.8,-0.7) {Sprint actif};
+
+  \fill[ganttGrey, draw=ganttGreyDark, rounded corners=1.5pt, line width=0.4pt]
+    (8.5,-0.9) rectangle (9.1,-0.5);
+  \node[anchor=west, font=\tiny, text=ganttGreyDark] at (9.2,-0.7) {Phase pr\'eliminaire};
+
+  \fill[ganttBarLight, draw=ganttMid!70, rounded corners=1.5pt, line width=0.4pt]
+    (12.9,-0.9) rectangle (13.5,-0.5);
+  \node[anchor=west, font=\tiny, text=ganttGreyDark] at (13.6,-0.7) {Parall\`ele continu};
+
+  %% ── Bordure extérieure ───────────────────────────────────
+  \draw[ganttDark!50, line width=0.8pt, rounded corners=4pt]
+    (-4.5,-1.1) rectangle (21.2,9.1);
+
+\end{tikzpicture}
+\caption{Diagramme de Gantt du projet Fleet~AI (F\'evrier -- Mai~2025)}
+\label{fig:gantt_planification}
+\end{figure}
+
+
+% =============================================================
+\section{Environnement de travail}
+% =============================================================
+
+Cette section détaille l'environnement technique mis en place pour le développement de Fleet~AI. Elle couvre les frameworks utilisés, les outils de développement employés et les systèmes de gestion de base de données adoptés.
+
+\definecolor{headerbg}{HTML}{d5f5e3}
+
+\begin{longtable}{|>{\centering\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{11cm}|}
+    \hline
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Front-end}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_angular}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Angular 19 :} Framework front-end moderne développé par Google, utilisé pour construire des interfaces utilisateur dynamiques et performantes avec une architecture modulaire basée sur les composants. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_primeng}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{PrimeNG :} Bibliothèque de composants UI riches pour Angular, offrant des tableaux paginés, des formulaires, des graphiques et des thèmes configurables. \\
+    \hline
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Mobile}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_flutter}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Flutter / Dart :} Framework multiplateforme de Google pour le développement d'applications mobiles natives (Android et iOS) à partir d'un code source unique. \\
+    \hline
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Back-end métier}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_spring_boot}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Spring Boot 3.4 :} Framework Java pour le développement rapide d'applications back-end robustes et sécurisées, incluant Spring Web, Spring Data JPA et Spring Security. \\
+    \hline
+
+
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Passerelle (Gateway)}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/flask}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Python / Flask :} La passerelle WFMS, développée en Python avec Flask, gère le routage des requêtes, l'authentification centralisée et le proxy vers les microservices. \\
+    \hline
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Services IA}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/fastapi}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Python / FastAPI :} Service dédié à l'intelligence artificielle : optimisation d'itinéraires (OR-Tools VRP), prédiction de la demande et des retards (XGBoost), explicabilité (SHAP). \\
+    \hline
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Bases de données}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_postgresql}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{PostgreSQL :} Système de gestion de base de données relationnelle open-source, reconnu pour sa robustesse, sa conformité SQL et ses extensions avancées (types JSON, PostGIS). \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_mongodb}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{MongoDB :} Base de données NoSQL orientée documents, utilisée pour le stockage flexible de données non structurées et les logs applicatifs. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_redis}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Redis :} Base de données clé-valeur en mémoire, utilisée comme cache pour les données fréquemment consultées afin d'optimiser les performances (P95 $<$200ms). \\
+    \hline
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Environnements de développement}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_intellij}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{IntelliJ IDEA :} IDE Java de JetBrains, utilisé pour le développement Spring Boot avec une assistance de code avancée et un débogueur intégré. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_vscode}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{VS Code :} Éditeur de code léger et extensible, utilisé pour le développement Angular et Python. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_android_studio}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Android Studio :} IDE officiel pour le développement Android, utilisé avec Flutter pour le test et le déploiement de l'application mobile. \\
+    \hline
+
+    \rowcolor{headerbg}
+    \multicolumn{2}{|c|}{\textbf{Outils et collaboration}} \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_gitlab}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{GitLab :} Plateforme de gestion de code source et de CI/CD, basée sur Git, facilitant le versionnage et le travail en équipe. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_postman}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{Postman :} Outil de test d'API REST permettant d'envoyer des requêtes HTTP et de valider les réponses des endpoints. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_pgadmin}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{pgAdmin :} Interface graphique d'administration de PostgreSQL pour la gestion et la consultation des bases de données. \\
+    \hline
+
+    \begin{minipage}[t]{3.8cm}
+      \vspace*{0pt}
+        \centering
+        \includegraphics[width=0.45\linewidth]{img/technologie/logo_mongodb_compass}
+        \vspace*{0.3cm}
+    \end{minipage}
+    &
+    \textbf{MongoDB Compass :} Interface graphique officielle de MongoDB pour l'exploration, la requête et l'analyse des données. \\
+    \hline
+
+\caption{Environnement technique de Fleet~AI}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}
+
+
+
+% =============================================================
+\section{Architecture logicielle}
+% =============================================================
+
+L'architecture logicielle de Fleet~AI repose sur une séparation claire entre trois couches applicatives : le \textbf{front-end web} (Angular~19), le \textbf{back-end métier} (Spring Boot~3.4) et l'\textbf{application mobile} (Flutter/Dart). Ces couches communiquent via la passerelle WFMS (Python/Flask) qui assure le routage et l'authentification centralisée.
+
+\subsection{Vue d'ensemble de l'architecture}
+
+L'architecture est appelée \textbf{Architecture en Couches (N-Tier Layered Architecture)}, composée des couches suivantes :
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|>{\bfseries}p{2.8cm}|p{3.8cm}|p{5.5cm}|}
+\hline
+\rowcolor{pghGreen!20}
+\textbf{Layer} & \textbf{Package} & \textbf{Technology} \\
+\hline
+Présentation & \texttt{controller/} & \texttt{@RestController}, Spring MVC \\
+\hline
+Service / Métier & \texttt{service/} & \texttt{@Service}, \texttt{@Transactional} \\
+\hline
+Accès aux données & \texttt{repository/} & Spring Data JPA / MongoDB \\
+\hline
+Domaine & \texttt{entity/} & JPA entities, JOINED inheritance \\
+\hline
+Cross-cutting & \texttt{security/}, \texttt{mapper/}, \texttt{dto/} & JWT filter, mappers, DTO pattern \\
+\hline
+\end{tabular}
+\caption{Architecture globale de Fleet~AI}
+\label{fig:architecture-globale}
+\end{table}
+
+\textbf{Flux de communication :}
+\begin{enumerate}
+    \item L'application \textbf{Angular 19} (web) ou \textbf{Flutter} (mobile) envoie les requêtes à la passerelle WFMS.
+    \item La \textbf{passerelle WFMS} (Python/Flask, port 8081) identifie le service cible, transmet la requête au back-end Spring Boot avec les en-têtes d'authentification.
+    \item Le \textbf{back-end Fleet~AI} (Spring Boot, port 8082) traite la requête, applique le RBAC, exécute la logique métier et interroge les bases de données.
+    \item Les données sont stockées dans \textbf{PostgreSQL} (données relationnelles) et \textbf{MongoDB} (documents et logs).
+    \item La réponse remonte par le même chemin jusqu'au client.
+\end{enumerate}
+
+% ------ BACKEND ARCHITECTURE ------
+\subsection{Architecture du Back-end (Spring Boot)}
+
+Le back-end Fleet~AI adopte une \textbf{architecture N-tiers en couches} (Layered Architecture) avec Spring Boot~3.4 et Java~17. Chaque couche a une responsabilité distincte, garantissant la séparation des préoccupations.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{img/architecture/backend_architecture}
+\caption{Architecture N-tiers en couches du back-end Fleet~AI}
+\label{fig:archi-backend}
+\end{figure}
+
+\begin{itemize}
+    \item[$\bullet$] \textbf{Controller :} Expose les endpoints REST, extrait le contexte WFMS et délègue aux services.
+    \item[$\bullet$] \textbf{Service :} Contient la logique métier, les validations et les règles de gestion.
+    \item[$\bullet$] \textbf{Repository :} Interface Spring Data JPA pour l'accès aux données relationnelles (PostgreSQL).
+    \item[$\bullet$] \textbf{Entity :} Classes JPA avec héritage JOINED (FleetUser $\rightarrow$ Chauffeur, Administrateur, Manager, Planificateur).
+    \item[$\bullet$] \textbf{DTO :} Objets de transfert séparés en \texttt{request/} et \texttt{response/} pour découpler l'API du modèle interne.
+    \item[$\bullet$] \textbf{Mapper :} Convertit les entités JPA en DTOs et inversement.
+    \item[$\bullet$] \textbf{Security :} Filtre d'authentification WFMS (\texttt{WfmsAuthFilter}) et intercepteur RBAC (\texttt{@RoleRequired}).
+\end{itemize}
+
+% ------ FRONTEND ARCHITECTURE ------
+\subsection{Architecture du Front-end (Angular)}
+
+Le front-end Angular~19 suit une \textbf{architecture modulaire} structurée en trois couches principales : \textbf{Core}, \textbf{Modules} (fonctionnalités métier) et \textbf{Shared} (composants réutilisables). Chaque module métier est découpé en sous-dossiers \texttt{data-access/} (services et modèles) et \texttt{pages/} (composants de vue).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{img/architecture/angular_frontend_architecture}
+\caption{Architecture modulaire du front-end Angular~19}
+\label{fig:archi-frontend}
+\end{figure}
+
+% ------ MOBILE ARCHITECTURE ------
+\subsection{Architecture Mobile (Flutter -- MVVM)}
+
+L'application mobile Flutter adopte le pattern \textbf{MVVM} (Model--View--ViewModel) qui sépare clairement la logique de présentation de la logique métier et de l'accès aux données.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{img/architecture/flutter_mvvm_architecture}
+\caption{Architecture MVVM de l'application mobile Flutter}
+\label{fig:archi-mobile}
+\end{figure}
+
+\begin{itemize}
+    \item[$\bullet$] \textbf{View :} Les widgets Flutter affichent l'interface utilisateur et capturent les interactions de l'utilisateur (chauffeur).
+    \item[$\bullet$] \textbf{ViewModel :} Gère l'état de l'application, transforme les données du modèle et notifie la vue des changements via le data binding.
+    \item[$\bullet$] \textbf{Model :} Contient les entités de données, les repositories qui encapsulent l'accès aux API REST (via la passerelle WFMS) et le stockage local pour le mode hors ligne.
+\end{itemize}
+
+
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+La méthodologie Scrum a permis une grande flexibilité tout au long du projet. L'architecture N-Tiers associée à la passerelle WFMS offre une structure robuste pour accueillir l'ensemble des fonctionnalités que nous décrirons dans les prochains chapitres.

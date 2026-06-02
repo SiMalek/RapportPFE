@@ -1,0 +1,132 @@
+%===========================================================%
+%  Rapport de Projet de Fin d'Études                       %
+%  Fleet AI – Application de Gestion de Flotte Intelligente %
+%  ISET Radès – DSI – 2024/2025                            %
+%===========================================================%
+\documentclass[isBinomal]{tpl/isetpfe}
+
+% ---- Police professionnelle (Times) ----
+\usepackage{mathptmx}
+
+% ---- Configuration globale ----
+\input{global_config}
+
+% ---- Bibliographie ----
+\addbibresource{biblio.bib}
+
+% ---- Couleurs PGH (vert / gris) ----
+\definecolor{pghGreen}{RGB}{30,110,50}
+\definecolor{pghGrey}{RGB}{100,100,100}
+\definecolor{headerbg}{HTML}{d5f5e3}
+
+% ---- Sous-figures côte à côte ----
+\usepackage{subcaption}
+
+% ---- Listings pour le code source ----
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{pghGreen}\bfseries,
+  commentstyle=\color{pghGrey}\itshape,
+  stringstyle=\color{red!60!black},
+  backgroundcolor=\color{gray!5},
+  frame=single,
+  rulecolor=\color{pghGreen!40},
+  breaklines=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  tabsize=2,
+  captionpos=b
+}
+
+% ---- TikZ pour les diagrammes d'architecture ----
+\usepackage{tikz}
+
+% ---- Pages paysage ----
+\usepackage{pdflscape}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds, calc, shadows}
+
+% ---- Diagramme de Gantt ----
+\usepackage{pgfgantt}
+
+% ---- Hyperliens ----
+\usepackage[
+  colorlinks=true,
+  linkcolor=pghGreen!80!black,
+  citecolor=pghGreen!70!black,
+  urlcolor=pghGreen!60!black
+]{hyperref}
+
+\begin{document}
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+% ========================  FRONT MATTER  ========================
+\frontmatter
+\pagestyle{frontmatter}
+\dominitoc
+
+% ---- Page de garde ----
+\input{tpl/cover_page}
+
+% ---- Dédicaces ----
+\input{dedicaces}
+\adjustmtc
+\input{dedicaces2}
+
+% ---- Remerciements ----
+\input{remerciement}
+\adjustmtc
+
+% ---- Tables ----
+\tableofcontents
+\listoffigures
+\listoftables
+
+% ---- Liste des abréviations (supprimée) ----
+
+% ========================  MAIN MATTER  ========================
+\mainmatter
+\pagestyle{fancy}
+
+% ---- Introduction générale ----
+\input{introduction}
+\adjustmtc
+
+% ---- Chapitre 1 : Cadre du projet ----
+\input{chap_01}
+
+% ---- Chapitre 2 : Étude préalable ----
+\input{chap_02}
+
+% ---- Chapitre 3 : Méthodologie et environnement ----
+\input{chap_03}
+
+% ---- Chapitre 4 : Sprint 1 ----
+\input{chap_04}
+
+% ---- Chapitre 5 : Sprint 2 ----
+\input{chap_05}
+
+% ---- Chapitre 6 : Sprint 3 ----
+\input{chap_06}
+
+% ---- Chapitre 7 : Sprint 4 ----
+\input{chap_07}
+
+% ---- Chapitre 8 : Sprint 5 ----
+\input{chap_08}
+
+% ---- Conclusion générale ----
+\input{conclusion}
+
+% ---- Bibliographie / Médiagraphie ----
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Médiagraphie}
+\printbibliography[title={Médiagraphie}]
+
+\end{document}

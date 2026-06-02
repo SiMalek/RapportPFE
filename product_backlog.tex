@@ -1,0 +1,171 @@
+\definecolor{headerbg}{HTML}{d5f5e3}
+\definecolor{sprints}{HTML}{b8e6c8}
+\renewcommand{\arraystretch}{1}
+\setlength{\arrayrulewidth}{1pt}
+\begin{longtable}{|c|>{\raggedright\arraybackslash}p{12cm}|c|}
+\hline
+
+\rowcolor{headerbg}
+\textbf{ID} & \textbf{User Story} & \textbf{Priorité} \\
+\hline
+\endfirsthead
+
+\rowcolor{headerbg}
+\textbf{ID} & \textbf{User Story (suite)} & \textbf{Priorité} \\
+\hline
+\endhead
+
+\multicolumn{3}{|>{\columncolor{sprints}}c|}{\textbf{Sprint 1 --- Fondation \& Gestion des Ressources} (S1--S2 $\mid$ 25 US)} \\\hline
+
+US-001 & En tant qu'utilisateur, je veux me connecter avec mes identifiants habituels afin d'accéder aux fonctionnalités Fleet~AI correspondant à mon rôle. & 1 \\\hline
+US-002 & En tant qu'Administrateur, je veux que les droits de chaque utilisateur soient contrôlés à chaque accès afin que chacun n'utilise que les fonctionnalités autorisées par son rôle. & 1 \\\hline
+US-003 & En tant qu'Administrateur, je veux gérer les comptes utilisateurs afin de contrôler les accès au système. & 1 \\\hline
+US-004 & En tant qu'Administrateur, je veux assigner un rôle à chaque utilisateur afin de définir ses permissions. & 1 \\\hline
+US-005 & En tant qu'Administrateur, je veux gérer les zones géographiques de livraison afin de structurer les opérations par région. & 1 \\\hline
+US-006 & En tant qu'Administrateur, je veux consulter le journal d'audit du système afin de tracer toutes les actions critiques. & 1 \\\hline
+US-007 & En tant qu'Administrateur, je veux déclencher des sauvegardes des données afin de protéger les informations du système. & 2 \\\hline
+US-008 & En tant qu'Administrateur, je veux consulter le tableau de bord avec les statistiques générales afin de superviser l'état du système. & 1 \\\hline
+US-009 & En tant que Planificateur, je veux consulter la liste des véhicules avec leur statut afin de connaître les ressources disponibles. & 1 \\\hline
+US-010 & En tant qu'Administrateur, je veux gérer les véhicules afin de maintenir le référentiel à jour. & 1 \\\hline
+US-011 & En tant que Planificateur, je veux marquer un véhicule en maintenance afin de le retirer temporairement de la planification. & 2 \\\hline
+US-012 & En tant que Manager, je veux consulter le taux d'utilisation des véhicules afin d'optimiser la flotte. & 2 \\\hline
+US-013 & En tant que Manager, je veux consulter les coûts par véhicule afin de suivre les dépenses opérationnelles. & 2 \\\hline
+US-014 & En tant que Planificateur, je veux consulter la disponibilité des chauffeurs afin de planifier les affectations. & 1 \\\hline
+US-015 & En tant que Planificateur, je veux consulter les performances des chauffeurs afin de guider les affectations. & 2 \\\hline
+US-016 & En tant que Manager, je veux consulter le classement des chauffeurs afin d'identifier les plus et les moins performants. & 2 \\\hline
+US-017 & En tant qu'Administrateur, je veux configurer les indicateurs de performance des chauffeurs afin d'adapter le calcul du score global. & 2 \\\hline
+US-018 & En tant que Chauffeur, je veux me connecter à l'application mobile afin d'accéder à mes fonctionnalités Fleet~AI. & 1 \\\hline
+US-019 & En tant que Chauffeur, je veux consulter mes indicateurs de performance depuis l'application mobile afin de suivre mon activité. & 2 \\\hline
+US-020 & En tant que Chauffeur, je veux déclarer ma disponibilité depuis l'application mobile afin de signaler mes périodes de présence. & 1 \\\hline
+
+US-085 & En tant qu'utilisateur, je veux recevoir des notifications en temps réel afin d'être informé des événements importants. & 1 \\\hline
+US-086 & En tant qu'utilisateur, je veux recevoir des notifications par email afin de suivre les événements même hors connexion. & 1 \\\hline
+US-087 & En tant qu'utilisateur, je veux configurer mes préférences de notification afin de recevoir uniquement les alertes pertinentes. & 2 \\\hline
+US-088 & En tant qu'utilisateur, je veux voir l'historique de mes notifications afin de retrouver les informations reçues. & 2 \\\hline
+US-138 & En tant que Chauffeur, je veux configurer mes préférences de notification sur l'application mobile afin de gérer mes alertes. & 2 \\\hline
+\multicolumn{3}{|>{\columncolor{sprints}}c|}{\textbf{Sprint 2 --- Gestion des Clients \& Commandes} (S3--S4 $\mid$ 30 US)} \\\hline
+
+US-094 & En tant que Responsable des Engagements Clients, je veux gérer le référentiel clients afin de maintenir une base clients à jour. & 1 \\\hline
+US-095 & En tant que Responsable des Engagements Clients, je veux gérer les adresses de livraison de mes clients afin d'assurer des livraisons précises à chaque emplacement. & 1 \\\hline
+US-096 & En tant que Responsable des Engagements Clients, je veux consulter l'historique complet d'un client afin de piloter la relation client. & 1 \\\hline
+US-097 & En tant que Responsable des Engagements Clients, je veux bloquer un client afin de suspendre ses commandes en cas de litige. & 1 \\\hline
+US-098 & En tant que Responsable des Engagements Clients, je veux débloquer un client afin de rétablir ses droits après régularisation. & 1 \\\hline
+US-099 & En tant que Responsable des Engagements Clients, je veux voir la liste des clients bloqués afin d'en assurer le suivi. & 1 \\\hline
+US-100 & En tant que Responsable des Engagements Clients, je veux que la création d'une commande soit refusée pour un client bloqué afin d'éviter toute expédition non autorisée. & 1 \\\hline
+US-101 & En tant que Responsable des Engagements Clients, je veux activer ou désactiver des comptes clients afin de gérer leurs accès. & 2 \\\hline
+US-102 & En tant que Responsable des Engagements Clients, je veux définir un niveau de service par client afin de garantir le respect des engagements contractuels. & 2 \\\hline
+US-103 & En tant que Client, je veux noter le service et le chauffeur après livraison afin de partager mon retour d'expérience. & 2 \\\hline
+US-104 & En tant que Client, je veux voir l'estimation d'arrivée de mes livraisons afin de planifier ma réception. & 2 \\\hline
+US-007b & En tant que Responsable des Engagements Clients, je veux créer une commande avec vérification de la disponibilité du stock afin d'éviter les ruptures. & 1 \\\hline
+US-008b & En tant que Planificateur, je veux que le système suive le cycle de vie complet d'une commande afin d'assurer la traçabilité de bout en bout. & 1 \\\hline
+US-009b & En tant que Client, je veux consulter le statut de mes commandes afin de suivre mes livraisons. & 1 \\\hline
+US-010b & En tant que Client, je veux annuler une commande avant son expédition afin d'ajuster mes besoins. & 1 \\\hline
+US-011b & En tant que Planificateur, je veux voir les commandes en attente d'affectation triées par priorité afin d'organiser le traitement. & 1 \\\hline
+US-012b & En tant que Responsable des Engagements Clients, je veux consulter le stock réel disponible afin de gérer les commandes en conséquence. & 1 \\\hline
+US-013b & En tant que Client, je veux consulter le stock disponible afin de passer commande en connaissance de cause. & 1 \\\hline
+US-014b & En tant que Responsable des Engagements Clients, je veux définir le stock visible par les clients afin de contrôler les informations publiées. & 1 \\\hline
+US-015b & En tant que Responsable des Engagements Clients, je veux modifier une commande existante afin de corriger ou d'adapter une demande. & 2 \\\hline
+US-016b & En tant que Responsable des Engagements Clients, je veux reprogrammer une livraison à la demande du client afin d'adapter la date à ses contraintes. & 2 \\\hline
+US-017b & En tant que Planificateur, je veux filtrer les commandes par statut, date, client et zone afin de gagner en efficacité. & 2 \\\hline
+US-018b & En tant que Responsable des Engagements Clients, je veux gérer les priorités des commandes afin d'assurer le traitement des demandes urgentes en premier. & 2 \\\hline
+US-019b & En tant que Responsable des Engagements Clients, je veux associer un niveau de priorité au client afin de personnaliser le service rendu. & 2 \\\hline
+US-020b & En tant que Client, je veux consulter l'historique de mes livraisons passées afin de suivre mon activité. & 2 \\\hline
+US-139 & En tant que Client, je veux noter une livraison depuis l'application mobile afin de partager mon évaluation. & 2 \\\hline
+
+US-089 & En tant que Planificateur, je veux que des notifications soient envoyées à chaque étape du workflow afin d'assurer la coordination entre acteurs. & 1 \\\hline
+US-090 & En tant que Client, je veux recevoir une notification à l'approche du chauffeur afin de me préparer à la réception. & 2 \\\hline
+US-092 & En tant que Client, je veux recevoir des rappels automatiques avant ma livraison afin de ne pas manquer la réception. & 3 \\\hline
+\multicolumn{3}{|>{\columncolor{sprints}}c|}{\textbf{Sprint 3 --- Planification \& Optimisation} (S5--S6 $\mid$ 21 US)} \\\hline
+
+US-021 & En tant que Planificateur, je veux assigner manuellement une commande à un chauffeur et un véhicule afin d'organiser les livraisons. & 1 \\\hline
+US-022 & En tant que Planificateur, je veux créer un plan de livraison quotidien regroupant plusieurs commandes afin d'optimiser les tournées. & 1 \\\hline
+US-023 & En tant que Planificateur, je veux voir la charge de chaque chauffeur afin d'équilibrer les affectations. & 1 \\\hline
+US-024 & En tant que Planificateur, je veux vérifier la capacité du véhicule avant affectation afin d'éviter les surcharges. & 1 \\\hline
+US-025 & En tant que Planificateur, je veux réassigner une livraison en cas de problème afin de garantir la continuité du service. & 1 \\\hline
+US-026 & En tant que Planificateur, je veux que le système estime les distances entre points de livraison afin d'optimiser les itinéraires. & 1 \\\hline
+US-027 & En tant que Planificateur, je veux gérer les créneaux horaires de livraison afin de respecter les engagements clients. & 2 \\\hline
+US-028 & En tant que Planificateur, je veux créer des plans hebdomadaires récurrents afin de faciliter la planification répétitive. & 2 \\\hline
+US-029 & En tant que Planificateur, je veux générer un document de chargement pour l'entrepôt afin de préparer les expéditions. & 2 \\\hline
+US-030 & En tant que Planificateur, je veux reprogrammer les livraisons échouées afin d'assurer leur traitement ultérieur. & 2 \\\hline
+US-031 & En tant que Planificateur, je veux définir des règles d'incompatibilité entre chauffeurs et zones afin d'éviter les erreurs d'attribution. & 3 \\\hline
+US-037 & En tant que Planificateur, je veux recevoir des suggestions du chauffeur le plus adapté afin d'optimiser les affectations. & 2 \\\hline
+US-032 & En tant que Planificateur, je veux recevoir des suggestions d'itinéraires optimisés afin de réduire les distances parcourues. & 1 \\\hline
+US-033 & En tant que Planificateur, je veux accepter, modifier ou rejeter chaque suggestion afin de garder le contrôle sur les décisions. & 1 \\\hline
+US-034 & En tant que Chauffeur, je veux voir l'itinéraire optimisé sur une carte afin de naviguer efficacement. & 1 \\\hline
+US-035 & En tant que Planificateur, je veux que le système respecte les contraintes métier lors de l'optimisation afin de garantir la faisabilité des plans. & 1 \\\hline
+US-036 & En tant que Planificateur, je veux que les parties prenantes soient notifiées après validation du plan afin d'assurer la coordination. & 1 \\\hline
+US-038 & En tant que Planificateur, je veux envoyer des retours au système afin d'améliorer la qualité des suggestions futures. & 2 \\\hline
+US-131 & En tant que Chauffeur, je veux voir mes livraisons et l'itinéraire optimisé sur la carte mobile afin de démarrer ma tournée. & 1 \\\hline
+US-106 & En tant que Planificateur, je veux un tableau de bord opérationnel en temps réel afin de suivre l'avancement des livraisons. & 1 \\\hline
+
+US-091 & En tant que Planificateur, je veux recevoir des alertes afin d'être informé des anomalies et risques détectés. & 2 \\\hline
+\multicolumn{3}{|>{\columncolor{sprints}}c|}{\textbf{Sprint 4 --- Exécution des Livraisons \& Paiement} (S7--S8 $\mid$ 32 US)} \\\hline
+
+US-039 & En tant que Chauffeur, je veux démarrer une livraison et voir ses détails afin de préparer la remise de commande. & 1 \\\hline
+US-040 & En tant que Chauffeur, je veux confirmer la livraison avec la signature du client afin de disposer d'une preuve numérique. & 1 \\\hline
+US-041 & En tant que Chauffeur, je veux prendre des photos géolocalisées afin de constituer une preuve de livraison. & 1 \\\hline
+US-042 & En tant que Chauffeur, je veux scanner les codes des articles livrés afin de valider la conformité de la commande. & 2 \\\hline
+US-043 & En tant que Chauffeur, je veux signaler un problème lors d'une livraison afin d'alerter le planificateur. & 1 \\\hline
+US-044 & En tant que Planificateur, je veux suivre en temps réel la position des chauffeurs afin de superviser les tournées. & 1 \\\hline
+US-045 & En tant que Planificateur, je veux que le statut de la commande soit mis à jour automatiquement afin de refléter l'avancement réel. & 1 \\\hline
+US-046 & En tant que Responsable des Engagements Clients, je veux générer un bordereau de livraison afin de documenter chaque tournée. & 2 \\\hline
+US-047 & En tant que Chauffeur, je veux remplir une checklist de départ véhicule afin de vérifier l'état du camion avant la tournée. & 2 \\\hline
+US-048 & En tant que Client, je veux suivre ma livraison en temps réel afin de connaître l'heure d'arrivée estimée. & 2 \\\hline
+US-049 & En tant que Planificateur, je veux que le système détecte les retards automatiquement afin d'alerter les parties concernées. & 2 \\\hline
+US-050 & En tant que Manager, je veux consulter les indicateurs de livraison du jour afin de superviser les opérations. & 2 \\\hline
+US-105 & En tant que Manager, je veux un tableau de bord stratégique afin de suivre les indicateurs clés de performance. & 1 \\\hline
+US-107 & En tant que Manager, je veux exporter les rapports afin de partager les résultats avec la direction. & 1 \\\hline
+US-108 & En tant que Manager, je veux voir les tendances sur plusieurs mois afin d'identifier les évolutions. & 1 \\\hline
+US-114 & En tant que Manager, je veux un tableau de bord financier afin de suivre les coûts et revenus liés au transport. & 3 \\\hline
+US-063 & En tant que Planificateur, je veux voir le statut de paiement d'une commande afin d'autoriser ou bloquer la livraison. & 1 \\\hline
+US-064 & En tant que Chauffeur, je veux enregistrer un paiement par chèque afin de le transmettre au Responsable pour validation. & 1 \\\hline
+US-065 & En tant que Responsable des Engagements Clients, je veux enregistrer un paiement à crédit afin de gérer les encours clients. & 1 \\\hline
+US-066 & En tant que Chauffeur, je veux consulter le récapitulatif de mes encaissements du jour afin de vérifier ma collecte. & 1 \\\hline
+US-067 & En tant que Responsable des Engagements Clients, je veux rapprocher les encaissements avec les commandes livrées afin d'assurer la cohérence comptable. & 1 \\\hline
+US-068 & En tant que Responsable des Engagements Clients, je veux gérer les encours clients afin de contrôler les risques financiers. & 2 \\\hline
+US-069 & En tant que Manager, je veux voir les statistiques de paiement afin d'analyser les modes de règlement utilisés. & 2 \\\hline
+US-070 & En tant que Client, je veux consulter mes factures et paiements afin de suivre mes transactions. & 2 \\\hline
+US-071 & En tant que Responsable des Engagements Clients, je veux que les justificatifs de paiement soient conservés afin de répondre aux obligations de traçabilité. & 2 \\\hline
+US-072 & En tant que Chauffeur, je veux remettre un justificatif de paiement au client après encaissement afin de documenter la transaction. & 3 \\\hline
+US-132 & En tant que Chauffeur, je veux mettre à jour le statut de chaque livraison depuis l'application mobile afin d'informer le planificateur en temps réel. & 1 \\\hline
+US-133 & En tant que Chauffeur, je veux capturer la signature du client sur l'application mobile afin de valider la remise de commande. & 1 \\\hline
+US-134 & En tant que Chauffeur, je veux prendre des photos géolocalisées depuis l'application mobile afin de constituer une preuve de livraison. & 1 \\\hline
+US-135 & En tant que Chauffeur, je veux valider les articles livrés depuis l'application mobile afin de confirmer la conformité de la commande. & 2 \\\hline
+US-136 & En tant que Chauffeur, je veux remplir la checklist de départ sur l'application mobile afin d'attester de l'état du véhicule. & 2 \\\hline
+
+\multicolumn{3}{|>{\columncolor{sprints}}c|}{\textbf{Sprint 5 --- Prédiction, Réclamations \& Notifications} (S9--S10 $\mid$ 34 US)} \\\hline
+
+US-073 & En tant que Planificateur, je veux des prédictions de la demande par zone et par jour afin d'anticiper les besoins en ressources. & 1 \\\hline
+US-074 & En tant que Planificateur, je veux des prédictions de retard pour chaque tournée afin de prendre des mesures préventives. & 1 \\\hline
+US-075 & En tant que Manager, je veux voir le niveau de confiance des prédictions afin d'évaluer leur fiabilité. & 2 \\\hline
+US-076 & En tant qu'Administrateur, je veux que les modèles de prédiction soient mis à jour périodiquement afin de maintenir leur précision. & 2 \\\hline
+US-077 & En tant que Manager, je veux comparer les prédictions au réel afin d'évaluer la performance du système. & 2 \\\hline
+US-078 & En tant que Planificateur, je veux des recommandations pour le dimensionnement de la flotte afin d'optimiser les ressources disponibles. & 3 \\\hline
+US-079 & En tant que Client, je veux soumettre une réclamation afin de signaler un problème lié à ma livraison. & 1 \\\hline
+US-080 & En tant que Responsable des Engagements Clients, je veux voir la liste des réclamations et les traiter afin d'assurer la satisfaction client. & 1 \\\hline
+US-081 & En tant que Client, je veux suivre le statut de ma réclamation afin d'être informé de son traitement. & 1 \\\hline
+US-082 & En tant que Manager, je veux des statistiques sur les réclamations afin d'identifier les points d'amélioration. & 2 \\\hline
+US-083 & En tant que Responsable des Engagements Clients, je veux que les réclamations non traitées soient escaladées automatiquement afin de respecter les délais de réponse. & 2 \\\hline
+US-084 & En tant que Manager, je veux identifier les causes récurrentes des réclamations afin de mettre en place des actions correctives. & 3 \\\hline
+US-137 & En tant que Chauffeur, je veux signaler un problème directement depuis l'application mobile afin de l'enregistrer en temps réel. & 1 \\\hline
+US-111 & En tant que Manager, je veux personnaliser mon tableau de bord afin d'afficher les indicateurs les plus pertinents pour mon activité. & 2 \\\hline
+US-113 & En tant que Manager, je veux un tableau de bord de performance des chauffeurs afin d'évaluer la qualité du service rendu. & 2 \\\hline
+US-110 & En tant que Manager, je veux recevoir des rapports récapitulatifs réguliers afin de suivre l'activité sans connexion permanente. & 2 \\\hline
+US-115 & En tant qu'Administrateur, je veux superviser les temps de réponse du système afin de garantir une expérience utilisateur fluide. & 1 \\\hline
+US-116 & En tant qu'Administrateur, je veux configurer des alertes sur les indicateurs clés afin d'être averti en cas de dépassement de seuil. & 2 \\\hline
+US-117 & En tant qu'Administrateur, je veux que les données fréquemment consultées soient optimisées afin de réduire les temps d'attente pour les utilisateurs. & 2 \\\hline
+US-118 & En tant qu'Administrateur, je veux que toutes les actions des utilisateurs soient journalisées afin d'assurer la traçabilité et la conformité réglementaire. & 1 \\\hline
+US-112 & En tant qu'Administrateur, je veux consulter les métriques d'utilisation du système afin de détecter les anomalies de fonctionnement. & 2 \\\hline
+US-140 & En tant que Chauffeur, je veux utiliser l'application en mode hors ligne afin de continuer à travailler sans connexion réseau. & 1 \\\hline
+US-141 & En tant que Chauffeur, je veux que mes données se synchronisent automatiquement au retour du réseau afin d'éviter toute perte d'information. & 1 \\\hline
+US-142 & En tant que Planificateur, je veux que les conflits de synchronisation soient gérés automatiquement afin d'assurer la cohérence des données. & 2 \\\hline
+US-143 & En tant que Chauffeur, je veux voir un indicateur de connexion sur l'application afin de savoir si je suis en mode hors ligne. & 2 \\\hline
+
+\hline
+\rowcolor{headerbg}
+\multicolumn{2}{|c|}{\textbf{Total}} & \textbf{133 US} \\
+\hline
+
+\caption{Product Backlog de Fleet~AI --- 5 sprints, 133 User Stories}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}

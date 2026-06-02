@@ -1,0 +1,224 @@
+\chapter{Sprint 4 : Exécution des Livraisons, Paiement \& Réclamations}
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+Le Sprint~4 couvre les semaines S7--S8 (60 stories, 144~SP). Il couvre l'exécution terrain des livraisons (preuves numériques, gestion des incidents), la gestion des trois modes de paiement, le suivi GPS en temps réel avec alertes de retard, le traitement des réclamations avec escalade automatique, et le pilotage via des tableaux de bord KPI journaliers. Le Planificateur et le Manager disposent d'interfaces web dédiées pour piloter l'ensemble de l'activité ; le Chauffeur intervient depuis l'application mobile pour la confirmation terrain.
+
+\clearpage
+
+\section{Sprint Backlog}
+
+\textbf{Objectif du sprint :} Le Chauffeur démarre ses livraisons, valide les paiements et peut travailler en mode hors ligne. Le Planificateur suit la flotte en temps réel sur carte GPS et reçoit des alertes automatiques de retard. Le Manager pilote l'activité journalière via des KPI temps réel. Les clients peuvent soumettre et suivre des réclamations, escaladées automatiquement au Manager si non résolues sous 48~heures. Les notifications multicanal informent toutes les parties prenantes.
+
+\input{sprint_backlog_4}
+
+% =============================================================
+\section{Conception}
+% =============================================================
+
+\subsection{Diagramme de cas d'utilisation}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/diagrammes/sprint_4_usecase_p1.png}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase_p1}%
+}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase}%
+}
+\caption{Diagramme de cas d'utilisation du Sprint~4 --- Partie~1}
+\label{fig:cas-utilisation-sp4-p1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/diagrammes/sprint_4_usecase_p2.png}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase_p2}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_4\_usecase\_p2.png]}\vspace{4cm}}}%
+}
+\caption{Diagramme de cas d'utilisation du Sprint~4 --- Partie~2}
+\label{fig:cas-utilisation-sp4-p2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/diagrammes/sprint_4_usecase_p3.png}{%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase_p3}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_4\_usecase\_p3.png]}\vspace{4cm}}}%
+}
+\caption{Diagramme de cas d'utilisation du Sprint~4 --- Partie~3}
+\label{fig:cas-utilisation-sp4-p3}
+\end{figure}
+
+\subsection{Description textuelle}
+
+\captionsetup[longtable]{justification=centering}
+\setlength{\arrayrulewidth}{1pt}
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+\rowcolor{headerbg}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+\textbf{Titre} & Confirmer une livraison \\
+\hline
+\textbf{Acteurs} & Chauffeur, Responsable des Engagements Clients (REC), Planificateur \\
+\hline
+\textbf{Objectif} & Permettre au Chauffeur de valider la remise de la marchandise avec preuves numériques depuis l'application mobile, et au Planificateur/Manager de suivre l'exécution en temps réel depuis l'interface web. \\
+\hline
+\textbf{Précondition} & La livraison est au statut EN\_COURS. Le paiement est validé (ou le mode est prépayé). Le Chauffeur est connecté à l'app mobile. \\
+\hline
+\textbf{Postcondition} & La livraison passe au statut LIVRÉE. La preuve est archivée (chiffrement AES-256, 5 ans). Le client et le REC sont notifiés. \\
+\hline
+\textbf{Scénario nominal} &
+\begin{enumerate}[start=1, label=\arabic*.]
+    \item Le Chauffeur ouvre la livraison depuis l'app mobile et clique sur « Confirmer ».
+    \item Le client signe sur l'écran tactile ; la signature est encodée en base64.
+    \item Le Chauffeur prend des photos géolocalisées horodatées de la marchandise livrée.
+    \item Le Chauffeur valide les articles remis et détecte tout écart avec la commande.
+    \item Le système enregistre la preuve et passe la livraison au statut LIVRÉE.
+    \item Le Planificateur voit la mise à jour en temps réel sur la carte GPS et le tableau de bord KPI.
+    \item Le REC génère le bordereau de livraison depuis l'interface web.
+\end{enumerate} \\
+\hline
+\textbf{Scénario alternatif} &
+\begin{enumerate}[start=1, label=\arabic*.]
+    \item Client absent : le Chauffeur sélectionne le motif « Client absent » ; statut passe à ÉCHOUÉE.
+    \item Article non conforme : une alerte est générée et envoyée au REC.
+    \item Mode de paiement non validé : la confirmation est bloquée jusqu'à l'approbation REC.
+    \item Livraison échouée non traitée : le Planificateur la reprogramme en priorité le lendemain.
+\end{enumerate} \\
+\hline
+\caption{Description textuelle --- Confirmer une livraison (Sprint 4)}
+\end{longtable}
+\setlength{\arrayrulewidth}{0.4pt}
+
+\subsection{Diagramme de classes}
+
+\newpage
+\thispagestyle{empty}
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, height=0.95\textheight, keepaspectratio]{img/diagrammes/sprint_4_classes}
+\caption{Diagramme de classes du Sprint 4}
+\label{fig:diag-classes-sp4}
+\end{figure}
+\end{landscape}
+
+% =============================================================
+\section{Réalisation}
+% =============================================================
+
+\subsection{Suivi GPS en temps réel et tableau de bord de pilotage}
+
+Le Sprint~4 marque le début de l'exécution terrain. Le Planificateur suit en temps réel la position de tous les chauffeurs actifs sur une carte Leaflet, mise à jour toutes les 30~secondes via WebSocket (STOMP/SockJS). Un service planifié détecte automatiquement les retards dépassant 15~minutes et déclenche des alertes visuelles sur l'interface. Le Manager dispose d'un tableau de bord KPI journalier affichant le taux de réussite, le nombre de livraisons en cours et les alertes actives. Le Client reçoit une notification lorsque le Chauffeur est à moins de dix minutes de son adresse.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp4_tracking_kpi_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_tracking_kpi_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp4\_tracking\_kpi\_composite]}\vspace{4cm}}}%
+}
+\caption{Carte GPS WebSocket, alertes retard et KPI journalier}
+\label{fig:sp4-tracking}
+\end{figure}
+
+\subsection{Gestion des trois modes de paiement}
+
+Le système prend en charge trois modes de paiement distincts, gérés exclusivement depuis l'interface web par le REC. Le mode \textbf{Prépayé} autorise la livraison automatiquement grâce au statut importé de l'ERP~: aucune action manuelle n'est requise. Le mode \textbf{Chèque} implique une capture OCR automatisée (GrepSys) par le Chauffeur, suivie d'une saisie dans PaySmart par le REC et d'une validation SMS envoyée au client. Le mode \textbf{Traite} requiert la photo de la traite et une décision explicite du REC (APPROUVÉ ou REFUSÉ avec motif obligatoire), tracée dans l'historique de paiement.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp4_payment_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_payment_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp4\_payment\_composite]}\vspace{4cm}}}%
+}
+\caption{Paiements : prépayé, chèque OCR et décision traite REC}
+\label{fig:sp4-payments}
+\end{figure}
+
+\subsection{Gestion des livraisons échouées et reprogrammation}
+
+En cas d'impossibilité de livrer, le Chauffeur signale le problème sur l'application mobile (CLIENT\_ABSENT, ACCES\_BLOQUE, REFUS\_CLIENT, MARCHANDISE\_ENDOMMAGEE, ADRESSE\_INCORRECTE). Le statut passe immédiatement à ÉCHOUÉE et une notification est envoyée au Planificateur et au REC. Depuis l'interface web, le Planificateur consulte la liste des livraisons échouées du jour et peut les reprogrammer en priorité le lendemain (J+1) avec réaffectation automatique.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp4_reclamations_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_reclamations_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp4\_issues\_composite]}\vspace{4cm}}}%
+}
+\caption{Livraisons échouées : motifs et reprogrammation J+1}
+\label{fig:sp4-issues}
+\end{figure}
+
+\subsection{Bordereaux de livraison et clôture de tournée}
+
+En fin de journée, le REC génère depuis l'interface web un bordereau de livraison pour chaque tournée, récapitulant les montants encaissés par mode de paiement (espèces, chèque, traite) et le statut de chaque livraison (LIVRÉE / ÉCHOUÉE / REPORTÉE). Ce bordereau sert de document officiel de clôture de tournée. La réconciliation des encaissements par rapport aux commandes planifiées est effectuée automatiquement par le système.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp4_recap_composite.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_recap_composite}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp4\_recap\_composite.png]}\vspace{4cm}}}%
+}
+\caption{Bordereau de clôture et réconciliation encaissements}
+\label{fig:sp4-recap}
+\end{figure}
+
+\subsection{Gestion et suivi des réclamations}
+
+Le REC traite les réclamations clients depuis une interface web dédiée, avec visualisation du statut, du délai de traitement et de l'historique des échanges. Si une réclamation reste non traitée après 48~heures, le système l'escalade automatiquement au Manager avec notification. Depuis l'application mobile, le Client peut soumettre une réclamation en sélectionnant la catégorie et la description, et suivre l'état de traitement en temps réel de ses tickets ouverts (Ouvertes / En cours / Résolues).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/support_client}
+\caption{Interface Composite Web et Mobile --- Module Support : liste des réclamations avec statut et priorité (REC-00002, REC-00001), et détail d'un ticket avec catégorie, description, délai SLA, réponse du REC et date de résolution}
+\label{fig:sp4-reclamations}
+\end{figure}
+
+\subsection{Application mobile Chauffeur --- Démarrage de sortie et checklist}
+
+Avant sa première livraison, le Chauffeur accepte le plan qui lui a été attribué, valide la checklist de contrôle véhicule (niveau d'huile, carburant, rétroviseurs, documents, propreté, chargement sécurisé) puis autorise le suivi GPS en arrière-plan. Une fois la checklist validée, la sortie démarre : le statut passe à \textit{En cours}, la première livraison s'active automatiquement et l'itinéraire complet (578~km, 4 arrêts) est affiché sur la carte TomTom.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/debut_livraison_chauffeur}
+\caption{Application mobile Chauffeur --- Démarrage de la sortie : (1)~plan en attente, acceptation, (2)~plan accepté avec bouton Démarrer, (3)~checklist véhicule complète, (4)~autorisation GPS arrière-plan, (5)~sortie démarrée avec activation livraison et (6)~itinéraire optimisé sur carte}
+\label{fig:sp4-start}
+\end{figure}
+
+\subsection{Application mobile Chauffeur --- Finalisation et paiement de livraison}
+
+A l'arrivée chez le client, le chauffeur signale son arrivée (ou elle est détectée automatiquement par le système GPS quand il entre dans le périmètre de l'adresse). Il consulte le bon de livraison PDF généré automatiquement, prend une photo de la marchandise remise, puis capture le paiement selon le mode indiqué (ici : chèque). L'écran de capture du chèque lui permet de photographier le titre et d'envoyer le montant au REC pour validation. La photo est transmise en temps réel et la livraison passe au statut LIVRÉE après confirmation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/finaliser_livraison_chauffeur}
+\caption{Application mobile Chauffeur --- Finalisation de livraison : bon de livraison PDF, signalement d'arrivée, actions terrain (voir bon, prendre photo, capturer paiement, signature, signaler problème), capture du chèque avec photo et envoi au REC}
+\label{fig:sp4-proof}
+\end{figure}
+
+% =============================================================
+\section{Tests}
+% =============================================================
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp4_test_browser.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_test_browser}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp4\_test\_browser.png]}\vspace{4cm}}}%
+}
+\caption{Exécution d'un test de navigateur sur la page de suivi GPS}
+\label{fig:sp4-test}
+\end{figure}
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+Le Sprint~4 couvre l'intégralité de la phase d'exécution terrain de Fleet~AI : suivi GPS temps réel via WebSocket, gestion des trois modes de paiement, traitement des incidents et réclamations avec escalade automatique, et pilotage via tableaux de bord KPI journaliers. Les fonctionnalités de démarrage de sortie avec checklist véhicule, de confirmation terrain (prise de photo, capture chèque, signalement d'arrivée) et de support client sont illustrées par les captures de l'application mobile Flutter. Le Sprint~5 introduira la couche prédictive IA et l'assistant conversationnel.
