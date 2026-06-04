@@ -1,10 +1,8 @@
-\chapter{Sprint 1 : Fondation \& Gestion des Ressources}
+﻿\chapter{Sprint 1 : Fondation \& Gestion des Ressources}
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 Le Sprint~1 constitue la fondation technique de Fleet~AI. Il met en place les mécanismes d'authentification unifiée via la passerelle WFMS et le contrôle d'accès par rôles, garantissant que chaque acteur n'accède qu'aux fonctionnalités qui lui sont attribuées. Les référentiels opérationnels — utilisateurs, véhicules, chauffeurs et zones géographiques — sont créés et gérés depuis l'interface web. Le journal d'audit et les sauvegardes assurent la traçabilité et la sécurité des données. En parallèle, l'application mobile Flutter est initialisée pour les Chauffeurs, leur permettant de se connecter, de consulter leurs indicateurs de performance et de déclarer leur disponibilité. Ce premier sprint pose les bases sur lesquelles tous les sprints suivants vont s'appuyer.
-
-\clearpage
 
 \section{Sprint Backlog}
 
@@ -43,7 +41,7 @@ Le Sprint~1 constitue la fondation technique de Fleet~AI. Il met en place les m�
 \textbf{Postcondition} & L'opération est enregistrée dans le journal d'audit MongoDB. \\
 \hline
 \textbf{Scénario nominal} &
-\begin{enumerate}[start=1, label=\arabic*.]
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
     \item L'utilisateur accède à la page « Chauffeurs » depuis le menu latéral.
     \item Le système affiche la liste paginée des chauffeurs (nom, prénom, zone, permis, score).
     \item Pour ajouter : l'utilisateur clique sur « Ajouter », remplit le formulaire et valide.
@@ -53,7 +51,7 @@ Le Sprint~1 constitue la fondation technique de Fleet~AI. Il met en place les m�
 \end{enumerate} \\
 \hline
 \textbf{Scénario alternatif} &
-\begin{enumerate}[start=1, label=\arabic*.]
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
     \item Si les données sont invalides (permis expiré, champ vide), un message d'erreur est affiché.
     \item Si l'utilisateur n'a pas le rôle requis, le système retourne une erreur 403.
 \end{enumerate} \\
@@ -95,7 +93,7 @@ L'authentification passe par WFMS. Chaque acteur est redirigé vers son tableau 
 \IfFileExists{img/capture/web/sp1_dashboard_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_dashboard_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_dashboard\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_dashboard\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Tableau de bord Fleet~AI : KPIs administrateur et connexion WFMS}
 \label{fig:sp1-dashboard}
@@ -110,7 +108,7 @@ L'Administrateur crée, modifie et désactive des comptes utilisateurs, en assig
 \IfFileExists{img/capture/web/sp1_users_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_users_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_users\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_users\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Gestion des utilisateurs : liste par rôle et formulaire de création}
 \label{fig:sp1-users}
@@ -125,7 +123,7 @@ Chaque véhicule est défini par son immatriculation, ses capacités (poids, vol
 \IfFileExists{img/capture/web/sp1_vehicles_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_vehicles_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_vehicles\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_vehicles\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Gestion des véhicules : statuts, capacités et formulaire d'ajout}
 \label{fig:sp1-vehicles}
@@ -140,7 +138,7 @@ Le cycle de vie complet est couvert : création avec type de permis (B, C, CE, D
 \IfFileExists{img/capture/web/sp1_drivers_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_drivers_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_drivers\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_drivers\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Gestion des chauffeurs : score, performance et type de permis}
 \label{fig:sp1-drivers}
@@ -155,7 +153,7 @@ La gestion des zones permet de définir les périmètres de livraison. Deux type
 \IfFileExists{img/capture/web/sp1_zones_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_zones_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_zones\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_zones\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Gestion des zones : périmètres et éditeur de polygone Leaflet}
 \label{fig:sp1-zones}
@@ -170,7 +168,7 @@ Toutes les actions critiques sont enregistrées automatiquement dans le journal 
 \IfFileExists{img/capture/web/sp1_audit_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_audit_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_audit\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_audit\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Journal d'audit filtrable et déclenchement de sauvegarde}
 \label{fig:sp1-audit}
@@ -185,7 +183,7 @@ Le système intègre un centre de notifications temps réel (WebSocket). Les uti
 \IfFileExists{img/capture/web/sp1_notifications_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_notifications_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp1\_notifications\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp1\_notifications\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Centre de notifications WebSocket et préférences}
 \label{fig:sp1-notifications}
@@ -206,13 +204,20 @@ Afin de garantir la fiabilité et la robustesse des fonctionnalités développé
 \IfFileExists{img/capture/web/sp1_test_junit.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp1_test_junit}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp1\_test\_junit.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/capture/web/sp1\_test\_junit.png]}\vspace{1.5cm}}}%
 }
-\caption{Exemple d'un test unitaire et résultat d'exécution (Succès)}
+\caption{Exemple d'un test unitaire JUnit (Sprint~1)}
 \label{fig:sp1-test}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, height=0.32\textheight, keepaspectratio]{img/capture/web/sp1_resultat_test_junit}
+\caption{Résultats d'exécution des tests unitaires JUnit --- Sprint~1 (Succès)}
+\label{fig:sp1-test-result}
 \end{figure}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-Le Sprint~1 livre les fondations de Fleet~AI : authentification unifiée via la passerelle WFMS, contrôle d'accès par rôles, gestion complète des référentiels opérationnels (utilisateurs, véhicules, chauffeurs, zones) et journal d'audit avec double persistance. L'application mobile Flutter permet au Chauffeur de consulter son profil et ses performances. Ces composants constituent la base sur laquelle reposent tous les sprints suivants.
+Le Sprint~1 livre les fondations de Fleet~AI : authentification unifiée via WFMS, contrôle d'accès par rôles, gestion des référentiels opérationnels (utilisateurs, véhicules, chauffeurs, zones) et journal d'audit avec double persistance. L'application mobile Flutter permet au Chauffeur de consulter ses indicateurs et de déclarer sa disponibilité. Ces composants constituent la base des sprints suivants.

@@ -1,10 +1,8 @@
-\chapter{Sprint 2 : Données Métier, Commandes \& Client Mobile}
+﻿\chapter{Sprint 2 : Données Métier, Commandes \& Client Mobile}
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 Le Sprint~2 enrichit la plateforme avec les entités métier au cœur de l'activité logistique de PGH. La gestion des clients, du stock et du cycle de vie des commandes est mise en place côté web pour le REC et le Planificateur. Le REC peut créer des commandes, vérifier la disponibilité du stock, bloquer ou débloquer un client et consulter son historique complet. En parallèle, l'application mobile Client est développée, permettant de parcourir le catalogue, passer commande et suivre l'avancement des livraisons en temps réel. Ce sprint constitue le cœur fonctionnel de la plateforme, autour duquel s'articulent les sprints de planification et d'exécution terrain.
-
-\clearpage
 
 \section{Sprint Backlog}
 
@@ -32,7 +30,7 @@ Le Sprint~2 enrichit la plateforme avec les entités métier au cœur de l'activ
 \IfFileExists{img/diagrammes/sprint_2_usecase_p2.png}{%
   \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_2_usecase_p2}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_2\_usecase\_p2.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/diagrammes/sprint\_2\_usecase\_p2.png]}\vspace{1.5cm}}}%
 }
 \caption{Diagramme de cas d'utilisation du Sprint~2 --- Partie~2}
 \label{fig:cas-utilisation-sp2-p2}
@@ -43,7 +41,7 @@ Le Sprint~2 enrichit la plateforme avec les entités métier au cœur de l'activ
 \IfFileExists{img/diagrammes/sprint_2_usecase_p3.png}{%
   \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_2_usecase_p3}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_2\_usecase\_p3.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/diagrammes/sprint\_2\_usecase\_p3.png]}\vspace{1.5cm}}}%
 }
 \caption{Diagramme de cas d'utilisation du Sprint~2 --- Partie~3}
 \label{fig:cas-utilisation-sp2-p3}
@@ -60,29 +58,34 @@ Le Sprint~2 enrichit la plateforme avec les entités métier au cœur de l'activ
 \hline
 \textbf{Titre} & Gérer les commandes \\
 \hline
-\textbf{Acteurs} & Responsable des Engagements Clients (REC) \\
+\textbf{Acteurs} & REC (parties 1, 2, 3), Manager (parties 2, 3), Client (partie 2), Planificateur (partie 3), Système WFMS \\
 \hline
-\textbf{Objectif} & Permettre au REC de créer, valider, modifier et suivre le cycle de vie complet d'une commande depuis l'application web. \\
+\textbf{Objectif} &
+\begin{itemize}[nosep, leftmargin=1.4em]
+    \item \textbf{P1 :} Maintenir le référentiel clients (vue~360, priorité Standard/Premium/VIP, SLA, blocage/déblocage).
+    \item \textbf{P2 :} Gérer le cycle de vie des commandes (création, acceptation/rejet, suivi ETA par IA) pour le REC, le Manager et le Client.
+    \item \textbf{P3 :} Configurer le stock et les règles de livraison, affecter les chauffeurs et lancer les missions.
+\end{itemize} \\
 \hline
-\textbf{Précondition} & Le REC est authentifié via WFMS et le client concerné lui est assigné. Le stock est disponible. \\
+\textbf{Précondition} & Tous les acteurs sont authentifiés via WFMS. Le catalogue produits, le stock et les règles de livraison sont disponibles. \\
 \hline
-\textbf{Postcondition} & La commande passe au statut ACCEPTÉE et est envoyée à l'ERP pour préparation. \\
+\textbf{Postcondition} & Le référentiel clients est à jour~; la commande est transmise à l'ERP (statut ACCEPTÉE)~; les livraisons sont affectées et leur statut (confirmée ou échec) est enregistré. \\
 \hline
 \textbf{Scénario nominal} &
-\begin{enumerate}[start=1, label=\arabic*.]
-    \item Le REC accède à la page Commandes et clique sur « Nouvelle commande ».
-    \item Le système affiche le formulaire avec sélection du client et du catalogue.
-    \item Le REC sélectionne les articles, vérifie le stock disponible et valide.
-    \item Le système crée la commande (statut CRÉÉE) et notifie le client.
-    \item Le REC examine et valide la commande : statut passe à ACCEPTÉE.
-    \item Le système envoie automatiquement la commande à l'ERP Poulina.
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
+    \item Le REC met à jour la priorité et le SLA du client depuis la vue~360.
+    \item Le Client passe une commande~; le REC la crée, vérifie le stock et l'accepte (statut ACCEPTÉE) — la commande est envoyée à l'ERP.
+    \item Le Manager pilote via le dashboard~; le Client suit l'état et consulte l'ETA prédit par IA.
+    \item Le REC publie le stock en masse et configure les règles/types de livraison.
+    \item Le Planificateur consulte les commandes prêtes, affecte un chauffeur, démarre et confirme la livraison.
 \end{enumerate} \\
 \hline
 \textbf{Scénario alternatif} &
-\begin{enumerate}[start=1, label=\arabic*.]
-    \item Stock insuffisant : le système bloque la création et affiche un message d'alerte.
-    \item Client bloqué (impayés) : la création est refusée avec motif.
-    \item Le REC rejette la commande avec motif obligatoire.
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
+    \item Client bloqué : commande refusée~; le REC peut débloquer après régularisation.
+    \item Stock insuffisant : création bloquée~; le REC publie une mise à jour de stock en masse.
+    \item Commande rejetée par le REC : le Client est notifié et peut l'annuler (statut CRÉÉE uniquement).
+    \item Échec de livraison : le Planificateur le signale~; la mission est replanifiée.
 \end{enumerate} \\
 \hline
 \caption{Description textuelle --- Gérer les commandes (Sprint 2)}
@@ -126,7 +129,7 @@ Le REC gère son portefeuille via une liste paginable avec filtres. La Vue 360°
 \IfFileExists{img/capture/web/sp2_clients_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp2_clients_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp2\_clients\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp2\_clients\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Gestion clients : Vue 360°, blocage et adresses GPS}
 \label{fig:sp2-clients-addresses}
@@ -141,7 +144,7 @@ Deux niveaux de stock coexistent : le stock réel (visible REC uniquement) et le
 \IfFileExists{img/capture/web/sp2_stock_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp2_stock_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp2\_stock\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp2\_stock\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Catalogue : niveaux stock réel et publié}
 \label{fig:sp2-stock}
@@ -156,7 +159,7 @@ La création d'une commande vérifie le statut de blocage du client et la dispon
 \IfFileExists{img/capture/web/sp2_orders_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp2_orders_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp2\_orders\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp2\_orders\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Commandes : badge de statut et formulaire de création}
 \label{fig:sp2-orders}
@@ -171,7 +174,7 @@ Le Manager définit les périmètres de responsabilité en assignant des clients
 \IfFileExists{img/capture/web/sp2_ec_assignments_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp2_ec_assignments_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp2\_ec\_assignments\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp2\_ec\_assignments\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Affectation REC-Client en lot}
 \label{fig:sp2-ec-assign}
@@ -183,14 +186,14 @@ L'application mobile permet au Client de parcourir le catalogue d'articles, de p
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/realisation_commande_client}
+\includegraphics[width=\linewidth, height=0.40\textheight, keepaspectratio]{img/capture/mobile/realisation_commande_client}
 \caption{Application mobile Client --- Processus complet de commande : catalogue, sélection d'article, panier, choix de l'adresse de livraison, type de livraison (Standard / Premium / VIP), sélection de créneau horaire et confirmation de la commande}
 \label{fig:sp2-mobile-order}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\linewidth, keepaspectratio]{img/capture/mobile/commande_client}
+\includegraphics[width=0.55\linewidth, height=0.37\textheight, keepaspectratio]{img/capture/mobile/commande_client}
 \caption{Application mobile Client --- Suivi des commandes : liste avec statuts (Affectée, En livraison, Annulée) et détail d'une commande avec progression live}
 \label{fig:sp2-mobile-tracking}
 \end{figure}
@@ -201,7 +204,7 @@ Le client est notifié automatiquement à chaque changement de statut de ses com
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.50\linewidth, keepaspectratio]{img/capture/mobile/notification_client}
+\includegraphics[width=0.40\linewidth, height=0.30\textheight, keepaspectratio]{img/capture/mobile/notification_client}
 \caption{Application mobile Client --- Centre de notifications : alertes de statut de commande (prête, rejetée) avec horodatage et compteurs de lecture}
 \label{fig:sp2-notification-client}
 \end{figure}
@@ -212,7 +215,7 @@ Le Client accède à son profil depuis l'onglet \textit{Profil}. Il y consulte l
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/profile_client}
+\includegraphics[width=\linewidth, height=0.38\textheight, keepaspectratio]{img/capture/mobile/profile_client}
 \caption{Application mobile Client --- Profil et gestion des adresses : récapitulatif commandes, liste des adresses de livraison enregistrées et formulaire d'ajout d'une nouvelle adresse}
 \label{fig:sp2-mobile-profile}
 \end{figure}
@@ -226,13 +229,20 @@ Le Client accède à son profil depuis l'onglet \textit{Profil}. Il y consulte l
 \IfFileExists{img/capture/web/sp2_test_e2e.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp2_test_e2e}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp2\_test\_e2e.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/capture/web/sp2\_test\_e2e.png]}\vspace{1.5cm}}}%
 }
-\caption{Exemple d'un test End-to-End (E2E) pour le Sprint~2 et résultat d'exécution (Succès)}
+\caption{Exemple d'un test End-to-End (E2E) --- Sprint~2}
 \label{fig:sp2-test}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, height=0.32\textheight, keepaspectratio]{img/capture/web/sp2_resultat_test_e2e}
+\caption{Résultats d'exécution des tests End-to-End --- Sprint~2 (Succès)}
+\label{fig:sp2-test-result}
 \end{figure}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-Le Sprint~2 livre le c{\oe}ur métier de Fleet~AI : gestion des clients, workflow de commandes à dix statuts, stock à deux niveaux et application mobile client. Le Sprint~3 ajoute la planification et l'optimisation des tournées.
+Le Sprint~2 livre le c{\oe}ur métier de Fleet~AI : gestion des clients, workflow de commandes à dix statuts, stock à deux niveaux et application mobile client. Le Sprint~3 couvre la planification et l'optimisation des tournées.

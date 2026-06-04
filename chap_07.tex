@@ -1,10 +1,8 @@
-\chapter{Sprint 4 : Exécution des Livraisons, Paiement \& Réclamations}
+﻿\chapter{Sprint 4 : Exécution des Livraisons, Paiement \& Réclamations}
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-Le Sprint~4 couvre l'exécution terrain des livraisons et le pilotage en temps réel. Le Chauffeur dispose sur son application mobile de toutes les fonctionnalités nécessaires pour démarrer une sortie, effectuer une checklist véhicule, valider les livraisons avec preuves numériques (signature, photos géolocalisées, scan d'articles) et traiter les paiements selon trois modes distincts : prépayé, chèque et traite. En cas d'incident, il peut signaler le problème directement depuis l'application. Le Planificateur suit la flotte en temps réel sur une carte GPS avec alertes automatiques de retard. Le REC rapproche les encaissements et traite les réclamations clients, escaladées automatiquement si non résolues dans les délais. Le Manager pilote l'ensemble de l'activité via des tableaux de bord KPI journaliers et des rapports exportables.
-
-\clearpage
+Le Sprint~4 couvre l'exécution terrain des livraisons et le pilotage en temps réel. Le Chauffeur dispose sur son application mobile de toutes les fonctionnalités nécessaires pour démarrer une sortie, effectuer une checklist véhicule, valider les livraisons avec preuves numériques (signature, photos géolocalisées, scan d'articles) et traiter les paiements (prépayé, chèque, traite). En cas d'incident, il peut signaler le problème directement depuis l'application. Le Planificateur suit la flotte en temps réel sur une carte GPS avec alertes automatiques de retard. Le REC rapproche les encaissements et traite les réclamations clients, escaladées automatiquement si non résolues dans les délais. Le Manager pilote l'ensemble de l'activité via des tableaux de bord KPI journaliers et des rapports exportables.
 
 \section{Sprint Backlog}
 
@@ -34,7 +32,7 @@ Le Sprint~4 couvre l'exécution terrain des livraisons et le pilotage en temps r
 \IfFileExists{img/diagrammes/sprint_4_usecase_p2.png}{%
   \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase_p2}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_4\_usecase\_p2.png]}\vspace{4cm}}}%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase}%
 }
 \caption{Diagramme de cas d'utilisation du Sprint~4 --- Partie~2}
 \label{fig:cas-utilisation-sp4-p2}
@@ -45,7 +43,7 @@ Le Sprint~4 couvre l'exécution terrain des livraisons et le pilotage en temps r
 \IfFileExists{img/diagrammes/sprint_4_usecase_p3.png}{%
   \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_4_usecase_p3}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_4\_usecase\_p3.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/diagrammes/sprint\_4\_usecase\_p3.png]}\vspace{1.5cm}}}%
 }
 \caption{Diagramme de cas d'utilisation du Sprint~4 --- Partie~3}
 \label{fig:cas-utilisation-sp4-p3}
@@ -71,7 +69,7 @@ Le Sprint~4 couvre l'exécution terrain des livraisons et le pilotage en temps r
 \textbf{Postcondition} & La livraison passe au statut LIVRÉE. La preuve est archivée (chiffrement AES-256, 5 ans). Le client et le REC sont notifiés. \\
 \hline
 \textbf{Scénario nominal} &
-\begin{enumerate}[start=1, label=\arabic*.]
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
     \item Le Chauffeur ouvre la livraison depuis l'app mobile et clique sur « Confirmer ».
     \item Le client signe sur l'écran tactile ; la signature est encodée en base64.
     \item Le Chauffeur prend des photos géolocalisées horodatées de la marchandise livrée.
@@ -82,7 +80,7 @@ Le Sprint~4 couvre l'exécution terrain des livraisons et le pilotage en temps r
 \end{enumerate} \\
 \hline
 \textbf{Scénario alternatif} &
-\begin{enumerate}[start=1, label=\arabic*.]
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
     \item Client absent : le Chauffeur sélectionne le motif « Client absent » ; statut passe à ÉCHOUÉE.
     \item Article non conforme : une alerte est générée et envoyée au REC.
     \item Mode de paiement non validé : la confirmation est bloquée jusqu'à l'approbation REC.
@@ -119,7 +117,7 @@ Le Sprint~4 marque le début de l'exécution terrain. Le Planificateur suit en t
 \IfFileExists{img/capture/web/sp4_tracking_kpi_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_tracking_kpi_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp4\_tracking\_kpi\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp4\_tracking\_kpi\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Carte GPS WebSocket, alertes retard et KPI journalier}
 \label{fig:sp4-tracking}
@@ -134,7 +132,7 @@ Le système prend en charge trois modes de paiement distincts, gérés exclusive
 \IfFileExists{img/capture/web/sp4_payment_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_payment_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp4\_payment\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp4\_payment\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Paiements : prépayé, chèque OCR et décision traite REC}
 \label{fig:sp4-payments}
@@ -149,7 +147,7 @@ En cas d'impossibilité de livrer, le Chauffeur signale le problème sur l'appli
 \IfFileExists{img/capture/web/sp4_reclamations_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_reclamations_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp4\_issues\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp4\_issues\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Livraisons échouées : motifs et reprogrammation J+1}
 \label{fig:sp4-issues}
@@ -164,7 +162,7 @@ En fin de journée, le REC génère depuis l'interface web un bordereau de livra
 \IfFileExists{img/capture/web/sp4_recap_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_recap_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp4\_recap\_composite.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/capture/web/sp4\_recap\_composite.png]}\vspace{1.5cm}}}%
 }
 \caption{Bordereau de clôture et réconciliation encaissements}
 \label{fig:sp4-recap}
@@ -176,7 +174,7 @@ Le REC traite les réclamations clients depuis une interface web dédiée, avec 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/support_client}
+\includegraphics[width=\linewidth, height=0.38\textheight, keepaspectratio]{img/capture/mobile/support_client}
 \caption{Interface Composite Web et Mobile --- Module Support : liste des réclamations avec statut et priorité (REC-00002, REC-00001), et détail d'un ticket avec catégorie, description, délai SLA, réponse du REC et date de résolution}
 \label{fig:sp4-reclamations}
 \end{figure}
@@ -187,7 +185,7 @@ Avant sa première livraison, le Chauffeur accepte le plan qui lui a été attri
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/debut_livraison_chauffeur}
+\includegraphics[width=\linewidth, height=0.46\textheight, keepaspectratio]{img/capture/mobile/debut_livraison_chauffeur}
 \caption{Application mobile Chauffeur --- Démarrage de la sortie : (1)~plan en attente, acceptation, (2)~plan accepté avec bouton Démarrer, (3)~checklist véhicule complète, (4)~autorisation GPS arrière-plan, (5)~sortie démarrée avec activation livraison et (6)~itinéraire optimisé sur carte}
 \label{fig:sp4-start}
 \end{figure}
@@ -198,7 +196,7 @@ A l'arrivée chez le client, le chauffeur signale son arrivée (ou elle est dét
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/finaliser_livraison_chauffeur}
+\includegraphics[width=\linewidth, height=0.42\textheight, keepaspectratio]{img/capture/mobile/finaliser_livraison_chauffeur}
 \caption{Application mobile Chauffeur --- Finalisation de livraison : bon de livraison PDF, signalement d'arrivée, actions terrain (voir bon, prendre photo, capturer paiement, signature, signaler problème), capture du chèque avec photo et envoi au REC}
 \label{fig:sp4-proof}
 \end{figure}
@@ -207,18 +205,20 @@ A l'arrivée chez le client, le chauffeur signale son arrivée (ou elle est dét
 \section{Tests}
 % =============================================================
 
+Afin de valider la compatibilité de l'interface web sur les principaux navigateurs du marché, un test de rendu multi-navigateurs a été réalisé sur le tableau de bord administrateur de Fleet~AI. Le même tableau de bord (KPI globaux, graphiques de performance, alertes actives) a été ouvert simultanément sous \textbf{Microsoft Edge}, \textbf{Google Chrome}, \textbf{Brave} et \textbf{Mozilla Firefox}. Le rendu est conforme sur les quatre navigateurs : les métriques (5~197 commandes, 11~053 livraisons, 798 chauffeurs, 1~545~968~DT de chiffre d'affaires), les jauges circulaires et les graphiques de tendance s'affichent de manière identique, confirmant l'absence de régression CSS ou JavaScript entre les moteurs de rendu Blink et Gecko.
+
 \begin{figure}[H]
 \centering
 \IfFileExists{img/capture/web/sp4_test_browser.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp4_test_browser}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp4\_test\_browser.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/capture/web/sp4\_test\_browser.png]}\vspace{1.5cm}}}%
 }
-\caption{Exécution d'un test de navigateur sur la page de suivi GPS}
+\caption{Test de compatibilité multi-navigateurs du tableau de bord administrateur (Edge, Chrome, Brave, Firefox)}
 \label{fig:sp4-test}
 \end{figure}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-Le Sprint~4 couvre l'intégralité de la phase d'exécution terrain de Fleet~AI : suivi GPS temps réel via WebSocket, gestion des trois modes de paiement, traitement des incidents et réclamations avec escalade automatique, et pilotage via tableaux de bord KPI journaliers. Les fonctionnalités de démarrage de sortie avec checklist véhicule, de confirmation terrain (prise de photo, capture chèque, signalement d'arrivée) et de support client sont illustrées par les captures de l'application mobile Flutter. Le Sprint~5 introduira la couche prédictive IA et l'assistant conversationnel.
+Le Sprint~4 couvre l'exécution terrain de Fleet~AI : suivi GPS temps réel, gestion des trois modes de paiement, traitement des incidents et réclamations avec escalade automatique, et tableaux de bord KPI journaliers. Les fonctionnalités terrain (checklist, confirmation, capture chèque, support client) sont illustrées par les captures de l'application mobile Flutter. Le Sprint~5 introduit la couche prédictive IA.

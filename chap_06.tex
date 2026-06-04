@@ -1,10 +1,8 @@
-\chapter{Sprint 3 : Planification \& Optimisation des Livraisons}
+﻿\chapter{Sprint 3 : Planification \& Optimisation des Livraisons}
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-Le Sprint~3 introduit le moteur de planification logistique de Fleet~AI. Il permet au Planificateur d'affecter les commandes prêtes aux chauffeurs disponibles, en tenant compte de la capacité des véhicules, des règles d'incompatibilité chauffeur-zone et de la charge journalière. Les plans de tournées journaliers et récurrents peuvent être créés, réordonnés et validés depuis l'interface web, avec génération automatique des bons de chargement. Le Chauffeur consulte son itinéraire du jour et ses points de livraison depuis l'application mobile. Ce sprint marque la transition du référentiel vers l'opérationnel : les données des sprints précédents sont désormais mobilisées pour orchestrer les livraisons sur le terrain.
-
-\clearpage
+Le Sprint~3 introduit le moteur de planification logistique de Fleet~AI. Il permet au Planificateur d'affecter les commandes prêtes aux chauffeurs disponibles, en tenant compte de la capacité des véhicules, des règles d'incompatibilité chauffeur-zone et de la charge journalière. Les plans de tournées journaliers et récurrents peuvent être créés, réordonnés et validés depuis l'interface web, avec génération des bons de chargement. Le Chauffeur consulte son itinéraire du jour et ses points de livraison depuis l'application mobile. Ce sprint marque la transition du référentiel vers l'opérationnel : les données des sprints précédents sont désormais mobilisées pour orchestrer les livraisons sur le terrain.
 
 \section{Sprint Backlog}
 
@@ -34,7 +32,7 @@ Le Sprint~3 introduit le moteur de planification logistique de Fleet~AI. Il perm
 \IfFileExists{img/diagrammes/sprint_3_usecase_p2.png}{%
   \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase_p2}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_3\_usecase\_p2.png]}\vspace{4cm}}}%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase}%
 }
 \caption{Diagramme de cas d'utilisation du Sprint~3 --- Partie~2}
 \label{fig:cas-utilisation-sp3-p2}
@@ -45,7 +43,7 @@ Le Sprint~3 introduit le moteur de planification logistique de Fleet~AI. Il perm
 \IfFileExists{img/diagrammes/sprint_3_usecase_p3.png}{%
   \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase_p3}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/diagrammes/sprint\_3\_usecase\_p3.png]}\vspace{4cm}}}%
+  \includegraphics[width=0.9\textwidth, height=0.85\textheight, keepaspectratio]{img/diagrammes/sprint_3_usecase}%
 }
 \caption{Diagramme de cas d'utilisation du Sprint~3 --- Partie~3}
 \label{fig:cas-utilisation-sp3-p3}
@@ -73,7 +71,7 @@ Le diagramme de cas d'utilisation du Sprint~3 implique deux acteurs métier prin
 \textbf{Postcondition} & Le plan est validé, les commandes passent à AFFECTÉE et les parties prenantes (Chauffeur, REC, Client) sont notifiées. \\
 \hline
 \textbf{Scénario nominal} &
-\begin{enumerate}[start=1, label=\arabic*.]
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
     \item Le Planificateur s'authentifie via WFMS et accède à l'interface de planification.
     \item Il crée un plan de livraison quotidien en sélectionnant les commandes prêtes.
     \item Il consulte la charge des chauffeurs disponibles et assigne commandes/véhicules.
@@ -85,7 +83,7 @@ Le diagramme de cas d'utilisation du Sprint~3 implique deux acteurs métier prin
 \end{enumerate} \\
 \hline
 \textbf{Scénario alternatif} &
-\begin{enumerate}[start=1, label=\arabic*.]
+\begin{enumerate}[start=1, label=\arabic*., nosep, leftmargin=1.4em]
     \item Aucun chauffeur disponible : le Planificateur peut définir des contraintes de non-affectation ou reprogrammer les livraisons échouées à J+1.
     \item Capacité véhicule dépassée : l'affectation est bloquée avec message explicite.
     \item Règle d'incompatibilité chauffeur-zone : une alerte est levée ; l'affectation est refusée.
@@ -122,7 +120,7 @@ Le Planificateur sélectionne les commandes au statut PRÊTE et les affecte à u
 \IfFileExists{img/capture/web/sp3_planning_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_planning_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp3\_planning\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp3\_planning\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Planification : commandes prêtes, charge chauffeurs et surcharge}
 \label{fig:sp3-manual}
@@ -139,7 +137,7 @@ Le système \texttt{resolveWeeklySchedule()} calcule automatiquement le planning
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth, keepaspectratio]{img/capture/mobile/disponibilite_chauffeur}
+\includegraphics[width=0.48\linewidth, height=0.34\textheight, keepaspectratio]{img/capture/mobile/disponibilite_chauffeur}
 \caption{App mobile --- Gestion de la disponibilité}
 \label{fig:sp3-availability}
 \end{figure}
@@ -153,7 +151,7 @@ Le Planificateur regroupe plusieurs commandes par chauffeur dans un plan journal
 \IfFileExists{img/capture/web/sp3_plans_composite.png}{%
   \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_plans_composite}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/sp3\_plans\_composite]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/sp3\_plans\_composite]}\vspace{1.5cm}}}%
 }
 \caption{Plans journaliers et bon de chargement PDF}
 \label{fig:sp3-plans}
@@ -165,22 +163,22 @@ Après validation du plan par le Planificateur, le Chauffeur reçoit son itinér
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.46\linewidth}
+\begin{subfigure}[t]{0.38\linewidth}
   \centering
   \IfFileExists{img/capture/mobile/itineraire_flutter.png}{%
-    \includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/itineraire_flutter.png}%
+    \includegraphics[width=\linewidth, height=0.30\textheight, keepaspectratio]{img/capture/mobile/itineraire_flutter.png}%
   }{%
-    \fbox{\parbox{0.9\linewidth}{\centering\vspace{3.5cm}\textit{Manque: itineraire\_flutter.png}\vspace{3.5cm}}}%
+    \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{Manque: itineraire\_flutter.png}\vspace{1.5cm}}}%
   }
   \caption{Itinéraire optimisé sur carte (Flutter)}
 \end{subfigure}
 \hfill
-\begin{subfigure}[t]{0.46\linewidth}
+\begin{subfigure}[t]{0.38\linewidth}
   \centering
   \IfFileExists{img/capture/mobile/liste_livraisons_flutter.png}{%
-    \includegraphics[width=\linewidth, keepaspectratio]{img/capture/mobile/liste_livraisons_flutter.png}%
+    \includegraphics[width=\linewidth, height=0.30\textheight, keepaspectratio]{img/capture/mobile/liste_livraisons_flutter.png}%
   }{%
-    \fbox{\parbox{0.9\linewidth}{\centering\vspace{3.5cm}\textit{Manque: liste\_livraisons\_flutter.png}\vspace{3.5cm}}}%
+    \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{Manque: liste\_livraisons\_flutter.png}\vspace{1.5cm}}}%
   }
   \caption{Liste des livraisons du jour (Flutter)}
 \end{subfigure}
@@ -192,18 +190,31 @@ Après validation du plan par le Planificateur, le Chauffeur reçoit son itinér
 \section{Tests}
 % =============================================================
 
+Un test d'intégration a été réalisé avec \textbf{Postman} sur l'endpoint \texttt{POST /api/sorties/list}, qui retourne la liste paginée des sorties (missions journalières) selon des critères de filtrage transmis dans le corps de la requête. L'authentification est assurée par l'en-tête \texttt{User-ID} (ici \texttt{sami.chaabane}). Le serveur répond en \textbf{200~OK} avec un payload JSON de 313~Ko en 1,127~seconde, confirmant la conformité du contrat d'API et la performance de la couche de persistance sous charge nominale.
+
 \begin{figure}[H]
 \centering
-\IfFileExists{img/capture/web/sp3_test_postman.png}{%
-  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_test_postman}%
+\IfFileExists{img/capture/web/sp3_test_postman_p1.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_test_postman_p1}%
 }{%
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{4cm}\textit{[img/capture/web/sp3\_test\_postman.png]}\vspace{4cm}}}%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/capture/web/sp3\_test\_postman\_p1.png]}\vspace{1.5cm}}}%
 }
-\caption{Exécution d'un test d'intégration avec Postman pour l'API de création de mission}
-\label{fig:sp3-test}
+\caption{Test Postman --- Endpoint \texttt{POST /api/sorties/list} : requête avec filtres et en-têtes d'authentification (HTTP~200 OK, 313~Ko)}
+\label{fig:sp3-test-p1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{img/capture/web/sp3_test_postman_p2.png}{%
+  \includegraphics[width=\linewidth, keepaspectratio]{img/capture/web/sp3_test_postman_p2}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1.5cm}\textit{[img/capture/web/sp3\_test\_postman\_p2.png]}\vspace{1.5cm}}}%
+}
+\caption{Test Postman --- Réponse paginée de l'endpoint \texttt{POST /api/sorties/list} : liste des sorties avec dates, entités (CLN, PGA), statuts et montants}
+\label{fig:sp3-test-p2}
 \end{figure}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-Le Sprint~3 livre le moteur de planification opérationnel de Fleet~AI : affectation manuelle avec contrôle de capacité, gestion des disponibilités des chauffeurs, plans journaliers et récurrents avec génération de bons de chargement. Le suivi GPS et le tableau de bord de pilotage durant l'exécution terrain sont détaillés dans le Sprint~4. Les fonctionnalités d'intelligence artificielle seront déployées dans le Sprint~5.
+Le Sprint~3 livre le moteur de planification de Fleet~AI : affectation manuelle avec contrôle de capacité, gestion des disponibilités, plans journaliers et récurrents avec génération de bons de chargement. Le suivi GPS et le tableau de bord de pilotage sont détaillés dans le Sprint~4 ; l'intelligence artificielle dans le Sprint~5.
